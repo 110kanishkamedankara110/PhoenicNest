@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">PhoenicNest</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="button">Button</string>
+    <string name="signin">Sign in</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="category">Category</string>
+    <string name="popular">Popular</string>
+    <string name="new_it">New</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_apps">My Apps</string>
+    <string name="downloads">Downloads</string>
+    <string name="notifications">Notifications</string>
+    <string name="log_out">Log Out</string>
+
+    <string name="download">Download</string>
+    <string name="harry_potter">Harry Potter</string>
+    <string name="description">Description</string>
+    <string name="todo">TODO</string>
+    <string name="todo_1">TODO</string>
+    <string name="todo_2">TODO</string>
+    <string name="change_picture">Change Picture</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="change_email">Change Email</string>
+    <string name="name">Name</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="day">Day</string>
+
+
+</resources>

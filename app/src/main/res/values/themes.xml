@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PhoenicNest" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+
+        <item name="colorPrimary">@color/buttonCol</item>
+        <item name="android:color">@color/black</item>
+
+    </style>
+
+    <style name="Theme.PhoenicNest" parent="Base.Theme.PhoenicNest" />
+</resources>

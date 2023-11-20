@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3C000000"
+    android:backgroundTint="#070404"
+    tools:context="com.phoenix.phoenixNest.Search">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/search_filed"
+            android:layout_width="256dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/border"
+            android:ems="10"
+            android:hint="Search"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textSize="14sp"
+            app:backgroundTint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search"
+            tools:ignore="VisualLintTextFieldSize" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:background="@drawable/blue_squire"
+            android:text="Search"
+            app:backgroundTint="#B000FF73"
+            app:layout_constraintBottom_toBottomOf="@+id/search_filed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toEndOf="@+id/search_filed"
+            app:layout_constraintTop_toTopOf="@+id/search_filed"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

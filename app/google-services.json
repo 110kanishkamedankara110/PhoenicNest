@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "635880375806",
+    "project_id": "phoenixnest-97f07",
+    "storage_bucket": "phoenixnest-97f07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635880375806:android:cc28b0fe8a59bb15c62caf",
+        "android_client_info": {
+          "package_name": "com.phoenix.phoenixNest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXqej1OiLrjOg9Dei5AxF40t8rgZPMplQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
