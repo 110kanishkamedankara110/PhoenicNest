@@ -47,8 +47,8 @@
 
                 <ImageView
                     android:id="@+id/appIcon"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/blue_squire"
                     android:backgroundTint="#00FFCC"
                     android:importantForAccessibility="no"

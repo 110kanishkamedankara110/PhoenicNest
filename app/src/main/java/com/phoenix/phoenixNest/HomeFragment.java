@@ -44,8 +44,12 @@ public class HomeFragment extends Fragment {
         super.onAttach(context);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        user.reload();
-        user = auth.getCurrentUser();
+        if(user!=null) {
+            user.reload();
+            user = auth.getCurrentUser();
+        }
+
+
     }
 
     @Override

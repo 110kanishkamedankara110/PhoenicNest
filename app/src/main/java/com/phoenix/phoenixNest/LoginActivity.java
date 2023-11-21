@@ -3,6 +3,7 @@ package com.phoenix.phoenixNest;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
                     if(!email.isEmpty() && !password.isEmpty()){
-                        firebaseAuth(email, password);
+                        firebaseAuth(email.trim(), password);
                     }
 
 
@@ -77,25 +78,55 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.fogetpw).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = ((EditText) findViewById(R.id.email)).getText().toString();
+                if(email.isEmpty()){
+                    new AlertDialog.Builder(LoginActivity.this).setTitle("Empty Email").setMessage("Please Enter Email").show();
+                }else{
+                    LoadingFragment loader=LoadingFragment.getLoader();
+                    loader.show(getSupportFragmentManager(),"Loader");
+                    mAuth.sendPasswordResetEmail(email.trim())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        loader.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Password Reset Email Sent", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        loader.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Email not found", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+
+            }
+        });
 
 
     }
 
     private void firebaseAuth(String email, String password) {
+        LoadingFragment loader=LoadingFragment.getLoader();
+        loader.show(getSupportFragmentManager(),"Loader");
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-
                             FirebaseUser user = mAuth.getCurrentUser();
+                            loader.dismiss();
                             updateUI(user);
+
                         } else {
-                            // If sign in fails, display a message to the user.
+
                             Log.w("u", "signInWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            loader.dismiss();
                             updateUI(null);
+
                         }
                     }
 

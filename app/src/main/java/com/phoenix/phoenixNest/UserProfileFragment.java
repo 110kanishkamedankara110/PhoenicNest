@@ -46,6 +46,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.phoenix.phoenicnest.R;
 import com.phoenix.phoenixNest.dto.User;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -126,12 +127,16 @@ public class UserProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        LoadingFragment loader = LoadingFragment.getLoader();
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
         fm = getActivity().getSupportFragmentManager();
         storage = FirebaseStorage.getInstance();
+
+
+
 
         StorageReference storageRef = storage.getReference();
 
@@ -171,36 +176,81 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.resetpw).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ResetPassword().show(fm, "resetpw");
+            }
+        });
+        view.findViewById(R.id.changeEm).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new EmailChangeFragment().show(fm, "changeEm");
+            }
+        });
 
         Uri img = user.getPhotoUrl();
+        loader.show(fm, "Loader");
         if (img == null) {
+
+
             Picasso.get()
                     .load(R.drawable.person)
                     .resize(200, 200)
                     .centerCrop()
-                    .into((ImageView) view.findViewById(R.id.profilepic));
+                    .into((ImageView) view.findViewById(R.id.profilepic), new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            loader.dismiss();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            loader.dismiss();
+                            Toast.makeText(view.getContext(), "Image Cannot be load", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
         } else {
             Picasso.get()
                     .load(img)
                     .resize(200, 200)
                     .centerCrop()
-                    .into((ImageView) view.findViewById(R.id.profilepic));
+                    .into((ImageView) view.findViewById(R.id.profilepic), new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            loader.dismiss();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            loader.dismiss();
+                            Toast.makeText(view.getContext(), "Image Cannot be load", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
         }
 
 
         ((ImageView) view.findViewById(R.id.profilepic)).setClipToOutline(true);
 
+        LoadingFragment loader2 = LoadingFragment.getLoader();
+        loader2.show(fm, "Loader");
         db.collection("user").document(user.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot,
                                 @Nullable FirebaseFirestoreException e) {
+                if(!loader2.isLoading){
+                    loader2.show(fm, "Loader");
+                }
                 ds = snapshot;
                 if (e != null) {
-
-
+                    if (loader2.isLoading) {
+                        loader2.dismiss();
+                    }
                 }
 
-                if (snapshot != null && snapshot.exists()) {
+                if(snapshot != null && snapshot.exists()) {
 
                     userdet = snapshot.toObject(User.class);
                     String[] dob = userdet.getDob().split("/");
@@ -215,30 +265,48 @@ public class UserProfileFragment extends Fragment {
                     year.setText(dob[0]);
                     month.setText(dob[1]);
                     day.setText(dob[2]);
-                } else {
+                    if (loader2.isLoading) {
+                        loader2.dismiss();
 
+                    }
+                } else {
+                    if (loader2.isLoading) {
+                        loader2.dismiss();
+
+                    }
                 }
             }
         });
-//                .get()
-//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//
-//                    }
-//                });
+
         ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
                 registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
                     if (uri != null) {
                         Log.d("PhotoPicker", "Selected URI: " + uri);
 
                         Pimage = uri;
+                        if(!loader.isLoading){
+                            loader.show(fm,"Loader");
+                        }
                         Picasso.get()
                                 .load(uri)
                                 .resize(200, 200)
                                 .centerCrop()
-                                .into((ImageView) view.findViewById(R.id.profilepic));
+                                .into((ImageView) view.findViewById(R.id.profilepic), new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        if(loader.isLoading){
+                                            loader.dismiss();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Exception e) {
+                                        if(loader.isLoading){
+                                            loader.dismiss();
+                                        }
+                                        Toast.makeText(view.getContext(), "Image Cannot be load", Toast.LENGTH_LONG).show();
+                                    }
+                                });
 
                     } else {
                         Log.d("PhotoPicker", "No media selected");
@@ -256,11 +324,11 @@ public class UserProfileFragment extends Fragment {
         view.findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 EditText name = view.findViewById(R.id.name);
                 EditText year = view.findViewById(R.id.year);
                 EditText month = view.findViewById(R.id.day);
                 EditText day = view.findViewById(R.id.month);
-                ImageView image = view.findViewById(R.id.profilepic);
 
                 String userName = name.getText().toString();
                 String birthYear = year.getText().toString();
@@ -273,7 +341,7 @@ public class UserProfileFragment extends Fragment {
                         Toast.makeText(view.getContext(), "Please Enter User Name", Toast.LENGTH_LONG).show();
                     } else if (birthYear.isEmpty()) {
                         Toast.makeText(view.getContext(), "Please Enter Birth Day", Toast.LENGTH_LONG).show();
-                    }else {
+                    } else {
                         Map<String, String> data = new HashMap();
                         String dob = birthYear + "/" + birthmonth + "/" + birthday;
                         data.put("name", userName);
@@ -313,16 +381,24 @@ public class UserProfileFragment extends Fragment {
                     }
 
                     if (data.size() > 0) {
+                        if(!loader.isLoading){
+                            loader.show(fm,"Loader");
+                        }
                         dor.update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(view.getContext(), "Details Updated", Toast.LENGTH_LONG).show();
+                                        if(loader.isLoading){
+                                            loader.dismiss();
+                                        }
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-
+                                        if(loader.isLoading){
+                                            loader.dismiss();
+                                        }
                                     }
                                 });
                     }
@@ -330,7 +406,9 @@ public class UserProfileFragment extends Fragment {
 
 
                 if (Pimage != null) {
-
+                    if(!loader2.isLoading){
+                        loader2.show(fm,"Loader");
+                    }
 
                     String imagename = Pimage.getLastPathSegment();
 
@@ -341,6 +419,9 @@ public class UserProfileFragment extends Fragment {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
                             // Handle unsuccessful uploads
+                            if(loader2.isLoading){
+                                loader2.dismiss();
+                            }
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -360,6 +441,9 @@ public class UserProfileFragment extends Fragment {
                                                         Toast.makeText(view.getContext(), "Image Change Success", Toast.LENGTH_LONG).show();
                                                         user.reload();
                                                         user = mAuth.getCurrentUser();
+                                                        if(loader2.isLoading){
+                                                            loader2.dismiss();
+                                                        }
                                                         fm.beginTransaction()
                                                                 .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
                                                                 .commit();

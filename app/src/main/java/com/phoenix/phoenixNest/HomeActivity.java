@@ -12,6 +12,7 @@ import android.view.View;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -39,6 +40,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         StatusBar.hideStatusBar(this);
 
+       LoadingFragment loader=LoadingFragment.getLoader();
+
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -46,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         if (user != null) {
             user.reload();
             user = mAuth.getCurrentUser();
-
+            loader.show(getSupportFragmentManager(),"Loader");
             db.collection("user").document(user.getUid())
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -56,7 +59,16 @@ public class HomeActivity extends AppCompatActivity {
                             if (documentSnapshot.exists()) {
                                 User user = documentSnapshot.toObject(User.class);
                                 System.out.println(user.getName());
+
                             }
+                            loader.dismiss();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            loader.dismiss();
+
+
                         }
                     });
 

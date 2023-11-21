@@ -65,7 +65,7 @@ public class SigninActivity extends AppCompatActivity {
                 } else if (!password1.equals(password2)) {
                     Toast.makeText(SigninActivity.this, "Password Doesn't Match", Toast.LENGTH_SHORT).show();
                 } else {
-                    firebaseAuth(email, password1);
+                    firebaseAuth(email.trim(), password1);
                 }
 
             }
@@ -76,14 +76,18 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private void firebaseAuth(String email, String password) {
+        LoadingFragment loader=LoadingFragment.getLoader();
+        loader.show(getSupportFragmentManager(),"Loader");
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
+                            loader.dismiss();
                             updateUI(user);
                         } else {
+                            loader.dismiss();
                             Toast.makeText(SigninActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 
