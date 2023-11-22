@@ -35,6 +35,8 @@
     <string name="newpassword">New Password</string>
     <string name="oldpassword">Old Password</string>
     <string name="new_email">New Email</string>
+    <string name="publish_an_app">Publish an App</string>
+    <string name="title">Title</string>
 
 
 </resources>

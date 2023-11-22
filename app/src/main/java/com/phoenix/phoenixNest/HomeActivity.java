@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
             System.out.println(user.isEmailVerified());
             if (!user.isEmailVerified()) {
                 Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Email", new View.OnClickListener() {
+                        .setAction("Verify-", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(Intent.ACTION_MAIN);

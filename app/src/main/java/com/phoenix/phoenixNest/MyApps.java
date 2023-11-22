@@ -24,14 +24,14 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 
-public class itemView extends Fragment {
+public class MyApps extends Fragment {
 
     Bundle extra;
     int[] name = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 3, 4, 34, 34, 34, 43, 443, 4, 3, 43, 43, 4, 2, 4, 2};
 
     FragmentManager fm;
 
-    public itemView() {
+    public MyApps() {
     }
 
 
@@ -44,7 +44,7 @@ public class itemView extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(com.phoenix.phoenicnest.R.layout.fragment_item_view, container, false);
+        return inflater.inflate(com.phoenix.phoenicnest.R.layout.fragment_my_apps, container, false);
     }
 
     @Override
@@ -57,7 +57,6 @@ public class itemView extends Fragment {
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         rec.setLayoutManager(staggeredGridLayoutManager);
         rec.setAdapter(new Adapter());
-
 
     }
 
@@ -78,17 +77,17 @@ public class itemView extends Fragment {
         }
     }
 
-    class Adapter extends RecyclerView.Adapter<itemView.Vh> {
+    class Adapter extends RecyclerView.Adapter<MyApps.Vh> {
         @NonNull
         @Override
-        public itemView.Vh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public MyApps.Vh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inf = LayoutInflater.from(parent.getContext());
             View v = inf.inflate(R.layout.layout_item, parent, false);
             return new Vh(v);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull itemView.Vh holder, int position) {
+        public void onBindViewHolder(@NonNull MyApps.Vh holder, int position) {
 
             int pos = position;
             holder.tw.post(new Runnable() {

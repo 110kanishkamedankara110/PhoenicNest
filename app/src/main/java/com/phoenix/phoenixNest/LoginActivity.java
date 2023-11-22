@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
 
                             Log.w("u", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_LONG).show();
                             loader.dismiss();
                             updateUI(null);
 

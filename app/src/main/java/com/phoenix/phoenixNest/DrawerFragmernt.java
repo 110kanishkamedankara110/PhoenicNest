@@ -173,7 +173,7 @@ public class DrawerFragmernt extends Fragment {
                 b.putString("title", "My Apps");
                 fm.beginTransaction()
                         .setReorderingAllowed(true).addToBackStack("My Apps")
-                        .replace(R.id.fragmentContainer, itemView.class, b)
+                        .replace(R.id.fragmentContainer, MyApps.class, b)
                         .commit();
             }
         });
