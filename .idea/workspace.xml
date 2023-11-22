@@ -9,17 +9,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5166fc09-e548-4ab6-afaf-be4ea42224a1" name="Changes" comment="(password change,email change, forget password)">
+    <list default="true" id="5166fc09-e548-4ab6-afaf-be4ea42224a1" name="Changes" comment="button style changed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/DrawerFragmernt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/DrawerFragmernt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/itemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/MyApps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/SingleViewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/SingleViewFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_drawer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_item_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_apps.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_single_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_single_view.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700549330520</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="button style changed">
+      <created>1700652735838</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1700652735838</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -318,6 +319,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="login/signin/profileupdate/and ui" />
     <MESSAGE value="(password change,email change, forget password)" />
-    <option name="LAST_COMMIT_MESSAGE" value="(password change,email change, forget password)" />
+    <MESSAGE value="button style changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="button style changed" />
   </component>
 </project>
