@@ -169,11 +169,10 @@ public class DrawerFragmernt extends Fragment {
         view.findViewById(R.id.myapps).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putString("title", "My Apps");
+
                 fm.beginTransaction()
                         .setReorderingAllowed(true).addToBackStack("My Apps")
-                        .replace(R.id.fragmentContainer, MyApps.class, b)
+                        .replace(R.id.fragmentContainer, MyApps.class, null)
                         .commit();
             }
         });

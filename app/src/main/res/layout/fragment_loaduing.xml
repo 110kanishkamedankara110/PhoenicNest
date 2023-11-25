@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/blue_squire"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/white"
         android:padding="30dp">
 
         <ProgressBar

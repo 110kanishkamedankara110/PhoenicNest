@@ -35,9 +35,11 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="39dp"
-            android:background="@drawable/blue_squire"
+
             android:text="Search"
-            app:backgroundTint="#B000FF73"
+            android:background="@drawable/light_button"
+            app:backgroundTint="@null"
+            android:textColor="@drawable/light_button_text"
             app:layout_constraintBottom_toBottomOf="@+id/search_filed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.666"

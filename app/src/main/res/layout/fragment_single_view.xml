@@ -91,10 +91,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:background="@drawable/blue_squire"
-                    android:backgroundTint="#01A6FF"
+
                     android:text="@string/download"
-                    app:backgroundTint="@null" />
+                    android:background="@drawable/light_button"
+                    app:backgroundTint="@null"
+                    android:textColor="@drawable/light_button_text"
+                    />
 
                 <Space
                     android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.phoenix.phoenixNest;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -24,10 +25,20 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.phoenix.phoenicnest.R;
+import com.phoenix.phoenixNest.dto.CategoryDto;
+import com.phoenix.phoenixNest.util.CategoryService;
+import com.phoenix.phoenixNest.util.Env;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeFragment extends Fragment {
@@ -44,7 +55,7 @@ public class HomeFragment extends Fragment {
         super.onAttach(context);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        if(user!=null) {
+        if (user != null) {
             user.reload();
             user = auth.getCurrentUser();
         }
@@ -69,7 +80,6 @@ public class HomeFragment extends Fragment {
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
-
         super.onViewCreated(view, savedInstanceState);
         fm = getActivity().getSupportFragmentManager();
         setCategory(view);
@@ -80,12 +90,61 @@ public class HomeFragment extends Fragment {
     }
 
     private void setCategory(View container) {
-        LinearLayout l = container.findViewById(R.id.category);
-        for (int i = 0; i < 10; i++) {
-            LayoutInflater inf = LayoutInflater.from(container.getContext());
-            View v = inf.inflate(R.layout.category_card, l, true);
 
-        }
+        LinearLayout l = container.findViewById(R.id.cardTest);
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Env.get(getContext(), "app.url"))
+                .addConverterFactory(GsonConverterFactory.create())
+
+                .build();
+        CategoryService service = retrofit.create(CategoryService.class);
+        Call<List<CategoryDto>> category = service.getCategory();
+
+        category.enqueue(new Callback<List<CategoryDto>>() {
+            @Override
+            public void onResponse(Call<List<CategoryDto>> call, Response<List<CategoryDto>> response) {
+                List<CategoryDto> categoryDtos = response.body();
+                LinearLayout l = container.findViewById(R.id.categorytext);
+                categoryDtos.forEach(c -> {
+
+                    LayoutInflater inf = LayoutInflater.from(container.getContext());
+
+                    View v = inf.inflate(R.layout.category_card, l, false);
+                    TextView tw = v.findViewById(R.id.cardTest);
+                    ImageView iw = v.findViewById(R.id.categoryImage);
+                    tw.setText(c.getCategory());
+                    TextView co = v.findViewById(R.id.count);
+                    System.out.println(Env.get(getContext(), "app.url") + "image/" + c.getImages().get(0));
+                    Picasso.get()
+                            .load(Uri.parse(Env.get(getContext(), "app.url") + "image/" + c.getImages().get(0)))
+//                            .load(R.drawable.person)
+                            .into(iw, new com.squareup.picasso.Callback() {
+                                @Override
+                                public void onSuccess() {
+
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+                                    e.printStackTrace();
+                                }
+                            });
+
+
+                    l.addView(v);
+                });
+
+            }
+
+            @Override
+            public void onFailure(Call<List<CategoryDto>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+
     }
 
     private void setPopular(View container) {
@@ -157,7 +216,7 @@ public class HomeFragment extends Fragment {
 
                             Picasso.get()
                                     .load(R.drawable.testimage)
-                                    .resize(containerWidth,containerheight)
+                                    .resize(containerWidth, containerheight)
                                     .centerCrop()
                                     .into(iv);
 

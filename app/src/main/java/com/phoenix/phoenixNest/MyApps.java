@@ -52,11 +52,22 @@ public class MyApps extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         fm = getActivity().getSupportFragmentManager();
         extra = getArguments();
-        ((TextView) view.findViewById(R.id.pageTitle)).setText(extra.getString("title"));
+        ((TextView) view.findViewById(R.id.pageTitle)).setText("My Apps");
         RecyclerView rec = view.findViewById(R.id.itemView);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         rec.setLayoutManager(staggeredGridLayoutManager);
         rec.setAdapter(new Adapter());
+
+
+        view.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fm.beginTransaction()
+                        .setReorderingAllowed(true).addToBackStack("add Apps")
+                        .replace(R.id.fragmentContainer, AddAnAppFragment.class, null)
+                        .commit();
+            }
+        });
 
     }
 
@@ -160,5 +171,7 @@ public class MyApps extends Fragment {
         public int getItemCount() {
             return name.length;
         }
+
+
     }
 }

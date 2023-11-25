@@ -33,6 +33,7 @@
                 android:background="@drawable/blue_squire"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
+                android:backgroundTint="@color/lightG"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +51,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/blue_squire"
-                    android:backgroundTint="#00FFCC"
+                    android:backgroundTint="@color/buttonCol"
                     android:importantForAccessibility="no"
                     android:scaleType="centerCrop"
 

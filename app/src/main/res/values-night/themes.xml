@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/buttonCol</item>
         <item name="android:color">@color/white</item>
 
-
     </style>
+
+
 </resources>

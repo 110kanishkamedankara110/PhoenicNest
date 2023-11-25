@@ -3,8 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="buttonCol">#00FFC1</color>
-    <color name="buttonBlueCOl">#00FFF7</color>
-
-    <color name="red">#FF0000</color>
+    <color name="buttonCol">#01875f</color>
+    <color name="buttonBlueCOl">#00FFC1</color>
+<color name="main">#FF9900</color>
+    <color name="red">	#c71c56</color>
+    <color name="lightG">#e6f3ef</color>
 </resources>

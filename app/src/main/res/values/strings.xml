@@ -37,6 +37,14 @@
     <string name="new_email">New Email</string>
     <string name="publish_an_app">Publish an App</string>
     <string name="title">Title</string>
+    <string name="Publish_new_app">Publish New App</string>
+    <string name="create_a_app">Create a App</string>
+    <string name="app_title">App Title</string>
+    <string name="pakage_structure">Pakage Structure</string>
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="app_icon">App Icon</string>
+    <string name="app_banner">App Banner</string>
 
 
 </resources>
