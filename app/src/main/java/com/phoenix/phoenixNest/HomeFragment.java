@@ -116,9 +116,8 @@ public class HomeFragment extends Fragment {
                     ImageView iw = v.findViewById(R.id.categoryImage);
                     tw.setText(c.getCategory());
                     TextView co = v.findViewById(R.id.count);
-                    System.out.println(Env.get(getContext(), "app.url") + "image/" + c.getImages().get(0));
                     Picasso.get()
-                            .load(Uri.parse(Env.get(getContext(), "app.url") + "image/" + c.getImages().get(0)))
+                            .load(Uri.parse(Env.get(getContext(), "app.url") + "image/category/" + c.getImages().get(0)))
 //                            .load(R.drawable.person)
                             .into(iw, new com.squareup.picasso.Callback() {
                                 @Override
@@ -213,6 +212,7 @@ public class HomeFragment extends Fragment {
 //                            holder.tw.setHeight(containerheight);
                             iv.setClipToOutline(true);
                             appi.setClipToOutline(true);
+                            appi.setElevation(100);
 
                             Picasso.get()
                                     .load(R.drawable.testimage)

@@ -17,6 +17,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.os.Handler;
+import android.os.Message;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +48,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.phoenix.phoenicnest.R;
 import com.phoenix.phoenixNest.dto.User;
+import com.phoenix.phoenixNest.util.Error;
+import com.phoenix.phoenixNest.util.Success;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -201,13 +205,14 @@ public class UserProfileFragment extends Fragment {
                     .into((ImageView) view.findViewById(R.id.profilepic), new Callback() {
                         @Override
                         public void onSuccess() {
+
                             loader.dismiss();
                         }
 
                         @Override
                         public void onError(Exception e) {
                             loader.dismiss();
-                            Toast.makeText(view.getContext(), "Image Cannot be load", Toast.LENGTH_LONG).show();
+                            Error.displayErrorMessage(view.findViewById(R.id.Error3),getContext(),"Image Cannot Load");
                         }
                     });
 
@@ -225,7 +230,7 @@ public class UserProfileFragment extends Fragment {
                         @Override
                         public void onError(Exception e) {
                             loader.dismiss();
-                            Toast.makeText(view.getContext(), "Image Cannot be load", Toast.LENGTH_LONG).show();
+                            Error.displayErrorMessage(view.findViewById(R.id.Error3),getContext(),"Image Cannot Load");
                         }
                     });
 
@@ -304,7 +309,7 @@ public class UserProfileFragment extends Fragment {
                                         if(loader.isLoading){
                                             loader.dismiss();
                                         }
-                                        Toast.makeText(view.getContext(), "Image Cannot be load", Toast.LENGTH_LONG).show();
+                                        Error.displayErrorMessage(view.findViewById(R.id.Error3),getContext(),"Image Cannot Load");
                                     }
                                 });
 
@@ -338,10 +343,23 @@ public class UserProfileFragment extends Fragment {
 
                 if (!ds.exists()) {
                     if (userName.isEmpty()) {
-                        Toast.makeText(view.getContext(), "Please Enter User Name", Toast.LENGTH_LONG).show();
+                        Error.setErrorFiled(name,getContext(),view.findViewById(R.id.Error3),"Please Enter User Name");
+                        Error.removeErrorFiled(year,getContext());
+                        Error.removeErrorFiled(month,getContext());
+                        Error.removeErrorFiled(day,getContext());
+
                     } else if (birthYear.isEmpty()) {
-                        Toast.makeText(view.getContext(), "Please Enter Birth Day", Toast.LENGTH_LONG).show();
+                        Error.setErrorFiled(year,getContext(),view.findViewById(R.id.Error3),"Please Select Date Of Birth");
+                        Error.removeErrorFiled(name,getContext());
+                        Error.setErrorFiled(month,getContext());
+                        Error.setErrorFiled(day,getContext());
                     } else {
+                        Error.removeErrorFiled(name,getContext());
+                        Error.setErrorFiled(month,getContext());
+                        Error.setErrorFiled(day,getContext());
+                        Error.setErrorFiled(year,getContext());
+                        Error.removeErrorText(view.findViewById(R.id.Error3),getContext());
+
                         Map<String, String> data = new HashMap();
                         String dob = birthYear + "/" + birthmonth + "/" + birthday;
                         data.put("name", userName);
@@ -349,7 +367,16 @@ public class UserProfileFragment extends Fragment {
                         db.collection("user").document(user.getUid()).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(view.getContext(), "Data Successfully Added", Toast.LENGTH_LONG).show();
+
+                                        Success.displaySuccessMessage(view.findViewById(R.id.Error3),getContext(),"Data Successfully Added");
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Success.removeSuccessText(view.findViewById(R.id.Error3),getContext());
+                                            }
+                                        },10000);
+
+
                                         fm.beginTransaction()
                                                 .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
                                                 .commit();
@@ -387,7 +414,13 @@ public class UserProfileFragment extends Fragment {
                         dor.update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(view.getContext(), "Details Updated", Toast.LENGTH_LONG).show();
+                                        Success.displaySuccessMessage(view.findViewById(R.id.Error3),getContext(),"Details Updated");
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Success.removeSuccessText(view.findViewById(R.id.Error3),getContext());
+                                            }
+                                        },10000);
                                         if(loader.isLoading){
                                             loader.dismiss();
                                         }
@@ -438,7 +471,13 @@ public class UserProfileFragment extends Fragment {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Toast.makeText(view.getContext(), "Image Change Success", Toast.LENGTH_LONG).show();
+                                                        Success.displaySuccessMessage(view.findViewById(R.id.Error3),getContext(),"Image Change Success");
+                                                        new Handler().postDelayed(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                Success.removeSuccessText(view.findViewById(R.id.Error3),getContext());
+                                                            }
+                                                        },10000);
                                                         user.reload();
                                                         user = mAuth.getCurrentUser();
                                                         if(loader2.isLoading){

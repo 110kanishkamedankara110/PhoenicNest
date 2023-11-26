@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.phoenix.phoenixNest.util.Error;
 import com.phoenix.phoenixNest.util.StatusBar;
 import com.phoenix.phoenicnest.R;
 
@@ -47,6 +49,8 @@ public class SigninActivity extends AppCompatActivity {
                 EditText emailText = findViewById(R.id.email);
                 EditText password1Text = findViewById(R.id.password);
                 EditText password2Text = findViewById(R.id.password2);
+                TextView errorText = findViewById(R.id.errorText);
+
 
                 String email = String.valueOf(emailText.getText());
                 String password1 = String.valueOf(password1Text.getText());
@@ -55,16 +59,31 @@ public class SigninActivity extends AppCompatActivity {
 
 
                 if (email.isEmpty()) {
-                    Toast.makeText(SigninActivity.this, "Enter Your Email", Toast.LENGTH_SHORT).show();
+                    Error.setErrorFiled(emailText,SigninActivity.this,errorText,"Enter Your Email");
+                    Error.removeErrorFiled(password1Text,SigninActivity.this);
+                    Error.removeErrorFiled(password2Text,SigninActivity.this);
+
                 } else if (!email.matches(emailPattern)) {
-                    Toast.makeText(SigninActivity.this, "Email Is Not Valid", Toast.LENGTH_SHORT).show();
+                    Error.setErrorFiled(emailText,SigninActivity.this,errorText,"Email Is Not Valid");
+                    Error.removeErrorFiled(password1Text,SigninActivity.this);
+                    Error.removeErrorFiled(password2Text,SigninActivity.this);
                 } else if (password1.isEmpty()) {
-                    Toast.makeText(SigninActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                    Error.setErrorFiled(password1Text,SigninActivity.this,errorText,"Enter Password");
+                    Error.removeErrorFiled(emailText,SigninActivity.this);
+                    Error.removeErrorFiled(password2Text,SigninActivity.this);
                 } else if (password2.isEmpty()) {
-                    Toast.makeText(SigninActivity.this, "Validate Password", Toast.LENGTH_SHORT).show();
+                    Error.setErrorFiled(password2Text,SigninActivity.this,errorText,"Confirm Password");
+                    Error.removeErrorFiled(emailText,SigninActivity.this);
+                    Error.removeErrorFiled(password1Text,SigninActivity.this);
                 } else if (!password1.equals(password2)) {
-                    Toast.makeText(SigninActivity.this, "Password Doesn't Match", Toast.LENGTH_SHORT).show();
+                    Error.setErrorFiled(password2Text,SigninActivity.this,errorText,"Password Doesn't Match");
+                    Error.removeErrorFiled(emailText,SigninActivity.this);
+                    Error.setErrorFiled(password1Text,SigninActivity.this);
                 } else {
+                    Error.removeErrorFiled(password2Text,SigninActivity.this);
+                    Error.removeErrorFiled(emailText,SigninActivity.this);
+                    Error.removeErrorFiled(password1Text,SigninActivity.this);
+                    Error.removeErrorText(errorText,SigninActivity.this);
                     firebaseAuth(email.trim(), password1);
                 }
 
@@ -88,8 +107,7 @@ public class SigninActivity extends AppCompatActivity {
                             updateUI(user);
                         } else {
                             loader.dismiss();
-                            Toast.makeText(SigninActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Error.displayErrorMessage(findViewById(R.id.errorText),SigninActivity.this,"Authentication failed");
 
                         }
                     }

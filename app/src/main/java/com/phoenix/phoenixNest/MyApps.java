@@ -19,17 +19,30 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.phoenix.phoenicnest.R;
+import com.phoenix.phoenixNest.dto.AppDto;
+import com.phoenix.phoenixNest.util.Env;
+import com.phoenix.phoenixNest.util.GetAppService;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MyApps extends Fragment {
 
     Bundle extra;
-    int[] name = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 3, 4, 34, 34, 34, 43, 443, 4, 3, 43, 43, 4, 2, 4, 2};
-
+    List<AppDto> apps;
+    View v;
     FragmentManager fm;
+    LoadingFragment loader = LoadingFragment.getLoader();
 
     public MyApps() {
     }
@@ -49,14 +62,14 @@ public class MyApps extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
+        v=view;
         fm = getActivity().getSupportFragmentManager();
+        loadMyApps();
+
         extra = getArguments();
         ((TextView) view.findViewById(R.id.pageTitle)).setText("My Apps");
-        RecyclerView rec = view.findViewById(R.id.itemView);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
-        rec.setLayoutManager(staggeredGridLayoutManager);
-        rec.setAdapter(new Adapter());
 
 
         view.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
@@ -71,6 +84,38 @@ public class MyApps extends Fragment {
 
     }
 
+    private void loadMyApps() {
+        if (!loader.isLoading) {
+            loader.show(fm, "Loader");
+        }
+        Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(Env.get(getContext(), "app.url")).build();
+        GetAppService getAppService = retrofit.create(GetAppService.class);
+        Call<List<AppDto>> call = getAppService.getApps(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        System.out.println(Env.get(getContext(), "app.url") + "app/getApps/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+        call.enqueue(new Callback<List<AppDto>>() {
+            @Override
+            public void onResponse(Call<List<AppDto>> call, Response<List<AppDto>> response) {
+                if (response.isSuccessful()) {
+                    apps = response.body();
+                    RecyclerView rec =v.findViewById(R.id.itemView);
+                    StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+                    rec.setLayoutManager(staggeredGridLayoutManager);
+                    rec.setAdapter(new Adapter());
+                }
+                if (loader.isLoading) {
+                    loader.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AppDto>> call, Throwable t) {
+                if (loader.isLoading) {
+                    loader.dismiss();
+                }
+            }
+        });
+    }
+
 
     class Vh extends RecyclerView.ViewHolder {
 
@@ -83,8 +128,8 @@ public class MyApps extends Fragment {
             super(itemView);
             tw = itemView.findViewById(R.id.textView18);
             v = itemView;
-            iv=itemView.findViewById(R.id.bg);
-            appicon=itemView.findViewById(R.id.appIcon);
+            iv = itemView.findViewById(R.id.bg);
+            appicon = itemView.findViewById(R.id.appIcon);
         }
     }
 
@@ -105,30 +150,32 @@ public class MyApps extends Fragment {
                 @Override
                 public void run() {
                     System.out.println(holder.tw.getWidth());
-                    ImageView iv=holder.iv;
+                    ImageView iv = holder.iv;
                     ImageView appi = holder.appicon;
-                    Picasso.get().load(R.drawable.testimage).into(new Target() {
+                    System.out.println(Env.get(getContext(), "app.url") + "image/appIcon/" + apps.get(pos).getPackageName() + "/" + apps.get(pos).getAppBanner());
+                    Picasso.get().load(Env.get(getContext(), "app.url") + "image/appIcon/" + apps.get(pos).getPackageName() + "/" + apps.get(pos).getAppBanner()).into(new Target() {
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 
                             int width = bitmap.getWidth();
                             int height = bitmap.getHeight();
 
-                            int containerWidth=holder.tw.getWidth();
+                            int containerWidth = holder.tw.getWidth();
 
-                            int containerheight=(containerWidth/width)*height;
+                            int containerheight = (containerWidth / width) * height;
 
 
 //                            holder.tw.setHeight(containerheight);
                             iv.setClipToOutline(true);
                             appi.setClipToOutline(true);
+                            appi.setElevation(100);
                             Picasso.get()
-                                    .load(R.drawable.testimage)
-                                    .resize(containerWidth,containerheight)
+                                    .load(Env.get(getContext(), "app.url") + "image/appIcon/" + apps.get(pos).getPackageName() + "/" + apps.get(pos).getAppBanner())
+                                    .resize(containerWidth, containerheight)
                                     .centerCrop()
                                     .into(iv);
                             Picasso.get()
-                                    .load(R.drawable.testappicon)
+                                    .load(Env.get(getContext(), "app.url") + "image/appIcon/" + apps.get(pos).getPackageName() + "/" + apps.get(pos).getAppIcon())
                                     .resize(appi.getWidth(), appi.getHeight())
                                     .centerCrop()
                                     .into(appi);
@@ -153,15 +200,7 @@ public class MyApps extends Fragment {
                 public void onClick(View v) {
 
                     Bundle b = new Bundle();
-                    b.putString("name", String.valueOf(name[pos]));
 
-                    fm.beginTransaction()
-                            .setReorderingAllowed(true).addToBackStack("singleView")
-                            .replace(R.id.fragmentContainer, SingleViewFragment.class, b)
-                            .commit();
-
-
-                    Log.i("U", String.valueOf(name[pos]));
                 }
             });
 
@@ -169,7 +208,13 @@ public class MyApps extends Fragment {
 
         @Override
         public int getItemCount() {
-            return name.length;
+            if (apps != null) {
+                return apps.size();
+
+            } else {
+                return 0;
+
+            }
         }
 
 

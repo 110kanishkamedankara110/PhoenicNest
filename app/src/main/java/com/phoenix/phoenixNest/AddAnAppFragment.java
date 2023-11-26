@@ -25,6 +25,7 @@ import com.phoenix.phoenixNest.dto.AppMain;
 import com.phoenix.phoenixNest.dto.Message;
 import com.phoenix.phoenixNest.util.AddAppService;
 import com.phoenix.phoenixNest.util.Env;
+import com.phoenix.phoenixNest.util.Error;
 import com.phoenix.phoenixNest.util.Part;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -84,25 +85,47 @@ public class AddAnAppFragment extends Fragment {
             Uri appBanner = AddAnAppFragment.this.appBanner;
 
             if (appTitle.getText().toString().isEmpty()) {
-                new AlertDialog.Builder(getContext()).setTitle("Empty AppTitle").setMessage("Please Enter App Title").show();
+
+                Error.setErrorFiled(appTitle,getContext(),view.findViewById(R.id.errorText2),"Please Enter App Title");
+                Error.removeErrorFiled(pakageStructure,getContext());
+                Error.removeErrorFiled(mainActivity,getContext());
+
             } else if (pakageStructure.getText().toString().isEmpty()) {
 
-                new AlertDialog.Builder(getContext()).setTitle("Empty Package Name").setMessage("Please Enter Package name").show();
+                Error.setErrorFiled(pakageStructure,getContext(),view.findViewById(R.id.errorText2),"Please Enter Package name");
+                Error.removeErrorFiled(appTitle,getContext());
+                Error.removeErrorFiled(mainActivity,getContext());
 
             } else if (pakageStructure.getText().toString().trim().contains(" ")) {
 
-                new AlertDialog.Builder(getContext()).setTitle("Invalid Package Name").setMessage("Package Name Cannot Contain Any Spaces").show();
+                Error.setErrorFiled(pakageStructure,getContext(),view.findViewById(R.id.errorText2),"Package Name Cannot Contain Any Spaces");
+                Error.removeErrorFiled(appTitle,getContext());
+                Error.removeErrorFiled(mainActivity,getContext());
 
             } else if (mainActivity.getText().toString().isEmpty()) {
-                new AlertDialog.Builder(getContext()).setTitle("Empty Main Activity Name").setMessage("Please Enter Main Activity Name").show();
+
+                Error.setErrorFiled(mainActivity,getContext(),view.findViewById(R.id.errorText2),"Please Enter Main Activity Name");
+                Error.removeErrorFiled(pakageStructure,getContext());
+                Error.removeErrorFiled(appTitle,getContext());
 
             } else if (appIcon == null) {
-                new AlertDialog.Builder(getContext()).setTitle("App Icon Not Selected").setMessage("Please Select App Icon").show();
 
+                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Please Select App Icon");
+                Error.removeErrorFiled(appTitle,getContext());
+                Error.removeErrorFiled(pakageStructure,getContext());
+                Error.removeErrorFiled(mainActivity,getContext());
             } else if (appBanner == null) {
-                new AlertDialog.Builder(getContext()).setTitle("App Banner Not Selected").setMessage("Please Select App Banner").show();
+
+                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Please Select App Banner");
+                Error.removeErrorFiled(appTitle,getContext());
+                Error.removeErrorFiled(pakageStructure,getContext());
+                Error.removeErrorFiled(mainActivity,getContext());
 
             } else {
+                Error.removeErrorFiled(appTitle,getContext());
+                Error.removeErrorFiled(pakageStructure,getContext());
+                Error.removeErrorFiled(mainActivity,getContext());
+
                 AppMain appMain = new AppMain();
                 appMain.setAppName(appTitle.getText().toString());
                 appMain.setPakgeName(pakageStructure.getText().toString());
@@ -131,6 +154,7 @@ public class AddAnAppFragment extends Fragment {
                             if (response.isSuccessful()) {
                                 Message message = response.body();
                                 if (message.getMessage().equals("Sucess")) {
+                                    Error.removeErrorText(view.findViewById(R.id.errorText2),getContext());
                                     appTitle.setText("");
                                     appTitle.setText("");
                                     pakageStructure.setText("");
@@ -144,8 +168,7 @@ public class AddAnAppFragment extends Fragment {
                                     appB.setImageBitmap(null);
 
                                 } else {
-
-                                    new AlertDialog.Builder(getContext()).setTitle("Message").setMessage(message.getMessage()).show();
+                                    Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),message.getMessage());
                                 }
 
 
@@ -159,6 +182,7 @@ public class AddAnAppFragment extends Fragment {
                         public void onFailure(Call<Message> call, Throwable t) {
                             t.printStackTrace();
                             if (loader.isLoading) {
+                                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Request TimeOut");
                                 loader.dismiss();
                             }
                         }
@@ -203,7 +227,9 @@ public class AddAnAppFragment extends Fragment {
                                 if (loader.isLoading) {
                                     loader.dismiss();
                                 }
-                                Toast.makeText(view.getContext(), "Image Cannot be load", Toast.LENGTH_LONG).show();
+
+                                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Image Cannot be load");
+
                             }
                         });
 
@@ -237,7 +263,8 @@ public class AddAnAppFragment extends Fragment {
                                 if (loader.isLoading) {
                                     loader.dismiss();
                                 }
-                                Toast.makeText(view.getContext(), "Image Cannot be load", Toast.LENGTH_LONG).show();
+                                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Image Cannot be load");
+
                             }
                         });
 

@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue_squire"
+
     android:padding="10dp"
     tools:context="com.phoenix.phoenixNest.EmailChangeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+      android:background="@drawable/blue_squire"
+        android:backgroundTint="@color/white"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -62,9 +64,9 @@
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:background="@drawable/light_button"
-            app:backgroundTint="@null"
-            android:textColor="@drawable/light_button_text"
             android:text="@string/change_email"
+            android:textColor="@drawable/light_button_text"
+            app:backgroundTint="@null"
 
             />
     </LinearLayout>
