@@ -1,7 +1,9 @@
 package com.phoenix.phoenixNest;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,8 @@ import com.phoenix.phoenixNest.util.GetAppService;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,6 +44,7 @@ public class MyApps extends Fragment {
 
     Bundle extra;
     List<AppDto> apps;
+
     View v;
     FragmentManager fm;
     LoadingFragment loader = LoadingFragment.getLoader();
@@ -66,6 +71,7 @@ public class MyApps extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         v=view;
         fm = getActivity().getSupportFragmentManager();
+
         loadMyApps();
 
         extra = getArguments();
@@ -101,10 +107,13 @@ public class MyApps extends Fragment {
                     StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
                     rec.setLayoutManager(staggeredGridLayoutManager);
                     rec.setAdapter(new Adapter());
+
                 }
                 if (loader.isLoading) {
                     loader.dismiss();
                 }
+
+
             }
 
             @Override
@@ -134,6 +143,7 @@ public class MyApps extends Fragment {
     }
 
     class Adapter extends RecyclerView.Adapter<MyApps.Vh> {
+
         @NonNull
         @Override
         public MyApps.Vh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -149,28 +159,24 @@ public class MyApps extends Fragment {
             holder.tw.post(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println(holder.tw.getWidth());
                     ImageView iv = holder.iv;
                     ImageView appi = holder.appicon;
-                    System.out.println(Env.get(getContext(), "app.url") + "image/appIcon/" + apps.get(pos).getPackageName() + "/" + apps.get(pos).getAppBanner());
-                    Picasso.get().load(Env.get(getContext(), "app.url") + "image/appIcon/" + apps.get(pos).getPackageName() + "/" + apps.get(pos).getAppBanner()).into(new Target() {
-                        @Override
-                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 
-                            int width = bitmap.getWidth();
-                            int height = bitmap.getHeight();
+
+                            int width = apps.get(pos).getWidth();
+                            int height = apps.get(pos).getHeight();
 
                             int containerWidth = holder.tw.getWidth();
 
                             int containerheight = (containerWidth / width) * height;
 
 
-//                            holder.tw.setHeight(containerheight);
+                            holder.tw.setHeight(containerheight);
                             iv.setClipToOutline(true);
                             appi.setClipToOutline(true);
                             appi.setElevation(100);
                             Picasso.get()
-                                    .load(Env.get(getContext(), "app.url") + "image/appIcon/" + apps.get(pos).getPackageName() + "/" + apps.get(pos).getAppBanner())
+                                    .load(Env.get(getContext(), "app.url") + "image/appBanner/" + apps.get(pos).getPackageName() + "/" + apps.get(pos).getAppBanner())
                                     .resize(containerWidth, containerheight)
                                     .centerCrop()
                                     .into(iv);
@@ -180,17 +186,12 @@ public class MyApps extends Fragment {
                                     .centerCrop()
                                     .into(appi);
 
-                        }
 
-                        @Override
-                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
 
-                        }
 
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        }
-                    });
+
+
+
 
                 }
 
@@ -198,8 +199,19 @@ public class MyApps extends Fragment {
             holder.v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AppDto app=apps.get(pos);
 
-                    Bundle b = new Bundle();
+                        Bundle b = new Bundle();
+                        b.putString("PackageName",app.getPackageName());
+                        if(app.getDescription()!=null){
+                            b.putString("description",app.getDescription());
+                            b.putStringArrayList("category",(ArrayList<String>)app.getCategoryies());
+                        }
+                        fm.beginTransaction()
+                                .setReorderingAllowed(true).addToBackStack("MyApps")
+                                .replace(R.id.fragmentContainer, AppDetailsFragment.class,b)
+                                .commit();
+
 
                 }
             });

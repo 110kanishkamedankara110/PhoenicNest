@@ -74,7 +74,6 @@
             android:id="@+id/nextappAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginBottom="100dp"
 
 
@@ -84,8 +83,6 @@
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/mainAct"
-            app:layout_constraintHorizontal_bias="0.085"
-            app:layout_constraintStart_toEndOf="@+id/cancelAppAdd"
             app:layout_constraintTop_toBottomOf="@+id/appicon"
             app:layout_constraintVertical_bias="1.0" />
 
@@ -93,16 +90,16 @@
             android:id="@+id/cancelAppAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="152dp"
 
-            android:text="@string/cancel"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="100dp"
             android:background="@drawable/light_button"
 
+            android:text="@string/cancel"
             android:textColor="@drawable/light_button_text"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/mainAct"
+            app:layout_constraintEnd_toStartOf="@+id/nextappAdd"
             app:layout_constraintTop_toBottomOf="@+id/appicon"
             app:layout_constraintVertical_bias="1.0" />
 

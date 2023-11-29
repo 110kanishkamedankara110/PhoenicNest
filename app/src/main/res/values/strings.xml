@@ -45,6 +45,14 @@
     <string name="cancel">Cancel</string>
     <string name="app_icon">App Icon</string>
     <string name="app_banner">App Banner</string>
+    <string name="new_release">New Release</string>
+    <string name="version">Version</string>
+    <string name="version_code">Version Code</string>
+    <string name="screen_shots">Screen Shots</string>
+    <string name="previous">Previous</string>
+    <string name="publish">Publish</string>
+    <string name="add_apk_file">Add Apk FIle</string>
+    <string name="no_file_selected">No FIle Selected</string>
 
 
 </resources>

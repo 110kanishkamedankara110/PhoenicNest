@@ -9,29 +9,29 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5166fc09-e548-4ab6-afaf-be4ea42224a1" name="Changes" comment="AppAdd">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/dto/AppDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/Error.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/GetAppService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/Success.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/shkae.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/error_dorder.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+    <list default="true" id="5166fc09-e548-4ab6-afaf-be4ea42224a1" name="Changes" comment="created error handlers,error showing method ,app display,and add apps">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/AppDetailsFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/AppRelseaseFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/dto/AppDetailsDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/AppDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/ListListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/ListWithListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_add_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/baseline_close_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_app_details.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_app_relsease.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_category_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/screen_shots_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/AddAnAppFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/AddAnAppFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/MyApps.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/MyApps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/SigninActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/SigninActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/UserProfileFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/UserProfileFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/border.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_signin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_signin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/dto/AppDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/dto/AppDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/AddAppService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/AddAppService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_an_app.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_an_app.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_email_change.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_email_change.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_apps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_apps.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +135,7 @@
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatImageView.java_SELECTED&quot;: &quot;AppCompatImageView&quot;,
+    &quot;android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout/2.1.4/27e12209e529970f69bc817f349c247ef238fae7/constraintlayout-2.1.4-sources.jar!/androidx/constraintlayout/widget/ConstraintLayout.java_SELECTED&quot;: &quot;ConstraintLayout&quot;,
     &quot;android-custom-viewC:/Users/BLACKBOX/AndroidStudioProjects/PhoenicNest/app/src/main/java/com/phoenix/phoenixNest/util/RoundedImageView.java_SELECTED&quot;: &quot;RoundedImageView&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/BLACKBOX/AndroidStudioProjects/Firebase&quot;,
@@ -172,6 +173,9 @@
       <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\main\res" />
       <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\main\res\config" />
       <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\main\res\values" />
+    </key>
+    <key name="android.template.-1046237455">
+      <recent name="com.phoenix.phoenicnest" />
     </key>
     <key name="android.template.1874591707">
       <recent name="com.phoenix.phoenicnest" />
@@ -327,7 +331,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700922932344</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="created error handlers,error showing method ,app display,and add apps">
+      <created>1700999475455</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1700999475455</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -359,6 +370,7 @@
     <MESSAGE value="(password change,email change, forget password)" />
     <MESSAGE value="button style changed" />
     <MESSAGE value="AppAdd" />
-    <option name="LAST_COMMIT_MESSAGE" value="AppAdd" />
+    <MESSAGE value="created error handlers,error showing method ,app display,and add apps" />
+    <option name="LAST_COMMIT_MESSAGE" value="created error handlers,error showing method ,app display,and add apps" />
   </component>
 </project>

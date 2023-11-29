@@ -1,5 +1,6 @@
 package com.phoenix.phoenixNest.util;
 
+import com.phoenix.phoenixNest.dto.AppDetailsDto;
 import com.phoenix.phoenixNest.dto.AppMain;
 import com.phoenix.phoenixNest.dto.Message;
 
@@ -24,5 +25,8 @@ public interface AddAppService {
 
 
      Call<Message> addApp(@Part MultipartBody.Part appIcon, @Part MultipartBody.Part appBanner, @Part("appMain") AppMain appMain);
-
+    @POST("app/addAppDetails")
+    Call<Message> addAppDetails(@Body AppDetailsDto appDetailsDto);
+    @POST("app/updateAppDetails")
+    Call<Message> updateAppDetails(@Body AppDetailsDto appDetailsDto);
 }

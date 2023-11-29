@@ -155,17 +155,25 @@ public class AddAnAppFragment extends Fragment {
                                 Message message = response.body();
                                 if (message.getMessage().equals("Sucess")) {
                                     Error.removeErrorText(view.findViewById(R.id.errorText2),getContext());
+
+                                    ImageButton appI = view.findViewById(R.id.appicon);
+                                    ImageButton appB = view.findViewById(R.id.appbanner);
+                                    Bundle b = new Bundle();
+                                    b.putString("PackageName",pakageStructure.getText().toString());
+
                                     appTitle.setText("");
                                     appTitle.setText("");
                                     pakageStructure.setText("");
                                     mainActivity.setText("");
 
                                     clearIcons();
-                                    ImageButton appI = view.findViewById(R.id.appicon);
-                                    ImageButton appB = view.findViewById(R.id.appbanner);
 
                                     appI.setImageBitmap(null);
                                     appB.setImageBitmap(null);
+                                    fm.beginTransaction()
+                                            .setReorderingAllowed(true)
+                                            .replace(R.id.fragmentContainer, AppDetailsFragment.class, b)
+                                            .commit();
 
                                 } else {
                                     Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),message.getMessage());

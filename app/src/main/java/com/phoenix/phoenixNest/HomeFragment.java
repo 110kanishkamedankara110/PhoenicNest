@@ -118,7 +118,6 @@ public class HomeFragment extends Fragment {
                     TextView co = v.findViewById(R.id.count);
                     Picasso.get()
                             .load(Uri.parse(Env.get(getContext(), "app.url") + "image/category/" + c.getImages().get(0)))
-//                            .load(R.drawable.person)
                             .into(iw, new com.squareup.picasso.Callback() {
                                 @Override
                                 public void onSuccess() {
