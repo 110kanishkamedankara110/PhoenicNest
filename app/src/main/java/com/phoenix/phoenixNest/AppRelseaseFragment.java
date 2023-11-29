@@ -26,23 +26,39 @@ import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.phoenix.phoenicnest.R;
+import com.phoenix.phoenixNest.dto.AppReleaseDto;
+import com.phoenix.phoenixNest.dto.Message;
+import com.phoenix.phoenixNest.util.AddAppService;
 import com.phoenix.phoenixNest.util.AppDetails;
+import com.phoenix.phoenixNest.util.Env;
 import com.phoenix.phoenixNest.util.Error;
 import com.phoenix.phoenixNest.util.ListListener;
 import com.phoenix.phoenixNest.util.ListWithListener;
+import com.phoenix.phoenixNest.util.Part;
 import com.squareup.picasso.Picasso;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class AppRelseaseFragment extends Fragment {
 
     FragmentManager fm;
     Bundle extra;
-    List<Uri> screenshots;
+    List<Uri> screenshots = new LinkedList();
 
-    int maxItems=4;
+    int maxItems = 4;
     Uri apk;
 
     public AppRelseaseFragment() {
@@ -63,16 +79,20 @@ public class AppRelseaseFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_app_relsease, container, false);
     }
 
+    private void removeUris() {
+        screenshots = new LinkedList();
+        apk = null;
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LinearLayout ss=view.findViewById(R.id.SS);
-        screenshots=new ListWithListener<Uri>(new ListListener() {
+        LinearLayout ss = view.findViewById(R.id.SS);
+        screenshots = new ListWithListener<Uri>(new ListListener() {
             @Override
             public void onAdd(Object item) {
                 View cat = LayoutInflater.from(getContext()).inflate(R.layout.screen_shots_layout, ss, false);
-
 
 
                 ImageButton ib = cat.findViewById(R.id.delBut);
@@ -82,7 +102,7 @@ public class AppRelseaseFragment extends Fragment {
                         .load((Uri) item)
                         .resize(100, 200)
                         .centerCrop()
-                        .into((ImageView)cat.findViewById(R.id.ssImage));
+                        .into((ImageView) cat.findViewById(R.id.ssImage));
 
                 ib.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -107,7 +127,7 @@ public class AppRelseaseFragment extends Fragment {
             }
         });
 
-        ImageButton ib=view.findViewById(R.id.AddSs);
+        ImageButton ib = view.findViewById(R.id.AddSs);
         ib.setImageResource(R.drawable.baseline_add_24);
         fm = getActivity().getSupportFragmentManager();
         extra = getArguments();
@@ -116,11 +136,11 @@ public class AppRelseaseFragment extends Fragment {
                     // Callback is invoked after the user selects media items or closes the
                     // photo picker.
                     if (!uris.isEmpty()) {
-                        for(int i=0;i<(uris.size()<maxItems?uris.size():maxItems);i++){
+                        for (int i = 0; i < (uris.size() < maxItems ? uris.size() : maxItems); i++) {
                             screenshots.add(uris.get(i));
                         }
 
-                        screenshots.forEach(c->{
+                        screenshots.forEach(c -> {
                             System.out.println(c);
                         });
                     } else {
@@ -139,20 +159,17 @@ public class AppRelseaseFragment extends Fragment {
 
                             PackageInfo atb = AppDetails.getPackageInfo(uri, getContext());
 
-                            if(atb.packageName.equals(extra.getString("PackageName"))){
-                                TextView fileText=view.findViewById(R.id.fileText);
-                                EditText version=view.findViewById(R.id.versionText);
-                                EditText versioNCode=view.findViewById(R.id.vetsionCodeText);
+                            if (atb.packageName.equals(extra.getString("PackageName"))) {
+                                TextView fileText = view.findViewById(R.id.fileText);
+                                EditText version = view.findViewById(R.id.versionText);
+                                EditText versioNCode = view.findViewById(R.id.vetsionCodeText);
 
-                                fileText.setText(atb.packageName+" "+atb.versionName+" ("+atb.getLongVersionCode()+")");
+                                fileText.setText(atb.packageName + " " + atb.versionName + " (" + atb.getLongVersionCode() + ")");
                                 version.setText(atb.versionName);
                                 versioNCode.setText(String.valueOf(atb.getLongVersionCode()));
-                            }else{
-                                Error.displayErrorMessage(view.findViewById(R.id.ErrorMessageAppRelease),getContext(),"Invalid Package Name In Apk");
+                            } else {
+                                Error.displayErrorMessage(view.findViewById(R.id.ErrorMessageAppRelease), getContext(), "Invalid Package Name In Apk");
                             }
-
-
-
 
 
                         }
@@ -172,11 +189,111 @@ public class AppRelseaseFragment extends Fragment {
         view.findViewById(R.id.AddSs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                maxItems=4-screenshots.size();
-                if(screenshots.size()!=4){
+                maxItems = 4 - screenshots.size();
+                if (screenshots.size() != 4) {
                     pickMultipleMedia.launch(new PickVisualMediaRequest.Builder()
                             .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                             .build());
+                }
+
+            }
+        });
+        view.findViewById(R.id.canclePublish).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fm.popBackStack("MyApps",0);
+
+            }
+        });
+        view.findViewById(R.id.prev).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fm.popBackStack();
+            }
+        });
+
+
+        view.findViewById(R.id.publish).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (apk == null) {
+                    Error.displayErrorMessage(view.findViewById(R.id.ErrorMessageAppRelease), getContext(), "Select Apk File");
+
+                } else if (screenshots.size() == 0) {
+                    Error.displayErrorMessage(view.findViewById(R.id.ErrorMessageAppRelease), getContext(), "Add Screenshots");
+
+                } else {
+                    Error.removeErrorText(view.findViewById(R.id.ErrorMessageAppRelease), getContext());
+
+                    EditText version = view.findViewById(R.id.versionText);
+                    EditText versioNCode = view.findViewById(R.id.vetsionCodeText);
+
+                    LoadingFragment loadingFragment = LoadingFragment.getLoader();
+
+                    if (!loadingFragment.isLoading) {
+                        loadingFragment.show(fm, "Loader");
+                    }
+
+                    AppReleaseDto appReleaseDto = new AppReleaseDto();
+
+                    appReleaseDto.setPackageName(extra.getString("PackageName"));
+                    appReleaseDto.setVersion(version.getText().toString());
+                    appReleaseDto.setVersionCode(versioNCode.getText().toString());
+                    List<Uri> u = screenshots;
+
+                    try {
+                        MultipartBody.Part apkPart = new Part().getPart(view.getContext(), apk, "apk");
+
+                        List<MultipartBody.Part> screenshots = new Part().getParts(getContext(), u, "screenshots");
+
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(Env.get(getContext(), "app.url"))
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
+
+                        AddAppService addAppService = retrofit.create(AddAppService.class);
+                        addAppService.addAppRelease(apkPart, screenshots, appReleaseDto).enqueue(new Callback<Message>() {
+                            @Override
+                            public void onResponse(Call<Message> call, Response<Message> response) {
+                                if (response.isSuccessful()) {
+                                    Message message = response.body();
+                                    if (message.getMessage().equals("Sucess")) {
+                                        Error.removeErrorText(view.findViewById(R.id.ErrorMessageAppRelease), getContext());
+                                        ss.removeAllViews();
+                                        removeUris();
+                                        version.setText("");
+                                        versioNCode.setText("");
+
+                                        fm.popBackStack("MyApps",0);
+
+
+                                    } else {
+                                        Error.displayErrorMessage(view.findViewById(R.id.ErrorMessageAppRelease), getContext(), message.getMessage());
+
+                                    }
+                                }
+                                if (loadingFragment.isLoading) {
+                                    loadingFragment.dismiss();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Message> call, Throwable t) {
+                                Error.displayErrorMessage(view.findViewById(R.id.errorText2), getContext(), "Request TimeOut");
+                                if (loadingFragment.isLoading) {
+                                    loadingFragment.dismiss();
+                                }
+                                t.printStackTrace();
+                            }
+                        });
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        if (loadingFragment.isLoading) {
+                            loadingFragment.dismiss();
+                        }
+                    }
+
                 }
 
             }

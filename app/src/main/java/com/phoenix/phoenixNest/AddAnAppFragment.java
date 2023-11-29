@@ -43,6 +43,7 @@ public class AddAnAppFragment extends Fragment {
     private Uri appIcon;
     private Uri appBanner;
     LoadingFragment loader = LoadingFragment.getLoader();
+
     public AddAnAppFragment() {
         // Required empty public constructor
     }
@@ -72,9 +73,7 @@ public class AddAnAppFragment extends Fragment {
         ((ImageView) view.findViewById(R.id.appbanner)).setClipToOutline(true);
 
         fm = getActivity().getSupportFragmentManager();
-        view.findViewById(R.id.cancelAppAdd).setOnClickListener(v -> fm.beginTransaction()
-                .replace(R.id.fragmentContainer, MyApps.class, null)
-                .commit());
+        view.findViewById(R.id.cancelAppAdd).setOnClickListener(v -> fm.popBackStack());
 
         view.findViewById(R.id.nextappAdd).setOnClickListener(v -> {
 
@@ -86,45 +85,45 @@ public class AddAnAppFragment extends Fragment {
 
             if (appTitle.getText().toString().isEmpty()) {
 
-                Error.setErrorFiled(appTitle,getContext(),view.findViewById(R.id.errorText2),"Please Enter App Title");
-                Error.removeErrorFiled(pakageStructure,getContext());
-                Error.removeErrorFiled(mainActivity,getContext());
+                Error.setErrorFiled(appTitle, getContext(), view.findViewById(R.id.errorText2), "Please Enter App Title");
+                Error.removeErrorFiled(pakageStructure, getContext());
+                Error.removeErrorFiled(mainActivity, getContext());
 
             } else if (pakageStructure.getText().toString().isEmpty()) {
 
-                Error.setErrorFiled(pakageStructure,getContext(),view.findViewById(R.id.errorText2),"Please Enter Package name");
-                Error.removeErrorFiled(appTitle,getContext());
-                Error.removeErrorFiled(mainActivity,getContext());
+                Error.setErrorFiled(pakageStructure, getContext(), view.findViewById(R.id.errorText2), "Please Enter Package name");
+                Error.removeErrorFiled(appTitle, getContext());
+                Error.removeErrorFiled(mainActivity, getContext());
 
             } else if (pakageStructure.getText().toString().trim().contains(" ")) {
 
-                Error.setErrorFiled(pakageStructure,getContext(),view.findViewById(R.id.errorText2),"Package Name Cannot Contain Any Spaces");
-                Error.removeErrorFiled(appTitle,getContext());
-                Error.removeErrorFiled(mainActivity,getContext());
+                Error.setErrorFiled(pakageStructure, getContext(), view.findViewById(R.id.errorText2), "Package Name Cannot Contain Any Spaces");
+                Error.removeErrorFiled(appTitle, getContext());
+                Error.removeErrorFiled(mainActivity, getContext());
 
             } else if (mainActivity.getText().toString().isEmpty()) {
 
-                Error.setErrorFiled(mainActivity,getContext(),view.findViewById(R.id.errorText2),"Please Enter Main Activity Name");
-                Error.removeErrorFiled(pakageStructure,getContext());
-                Error.removeErrorFiled(appTitle,getContext());
+                Error.setErrorFiled(mainActivity, getContext(), view.findViewById(R.id.errorText2), "Please Enter Main Activity Name");
+                Error.removeErrorFiled(pakageStructure, getContext());
+                Error.removeErrorFiled(appTitle, getContext());
 
             } else if (appIcon == null) {
 
-                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Please Select App Icon");
-                Error.removeErrorFiled(appTitle,getContext());
-                Error.removeErrorFiled(pakageStructure,getContext());
-                Error.removeErrorFiled(mainActivity,getContext());
+                Error.displayErrorMessage(view.findViewById(R.id.errorText2), getContext(), "Please Select App Icon");
+                Error.removeErrorFiled(appTitle, getContext());
+                Error.removeErrorFiled(pakageStructure, getContext());
+                Error.removeErrorFiled(mainActivity, getContext());
             } else if (appBanner == null) {
 
-                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Please Select App Banner");
-                Error.removeErrorFiled(appTitle,getContext());
-                Error.removeErrorFiled(pakageStructure,getContext());
-                Error.removeErrorFiled(mainActivity,getContext());
+                Error.displayErrorMessage(view.findViewById(R.id.errorText2), getContext(), "Please Select App Banner");
+                Error.removeErrorFiled(appTitle, getContext());
+                Error.removeErrorFiled(pakageStructure, getContext());
+                Error.removeErrorFiled(mainActivity, getContext());
 
             } else {
-                Error.removeErrorFiled(appTitle,getContext());
-                Error.removeErrorFiled(pakageStructure,getContext());
-                Error.removeErrorFiled(mainActivity,getContext());
+                Error.removeErrorFiled(appTitle, getContext());
+                Error.removeErrorFiled(pakageStructure, getContext());
+                Error.removeErrorFiled(mainActivity, getContext());
 
                 AppMain appMain = new AppMain();
                 appMain.setAppName(appTitle.getText().toString());
@@ -154,12 +153,12 @@ public class AddAnAppFragment extends Fragment {
                             if (response.isSuccessful()) {
                                 Message message = response.body();
                                 if (message.getMessage().equals("Sucess")) {
-                                    Error.removeErrorText(view.findViewById(R.id.errorText2),getContext());
+                                    Error.removeErrorText(view.findViewById(R.id.errorText2), getContext());
 
                                     ImageButton appI = view.findViewById(R.id.appicon);
                                     ImageButton appB = view.findViewById(R.id.appbanner);
                                     Bundle b = new Bundle();
-                                    b.putString("PackageName",pakageStructure.getText().toString());
+                                    b.putString("PackageName", pakageStructure.getText().toString());
 
                                     appTitle.setText("");
                                     appTitle.setText("");
@@ -170,13 +169,12 @@ public class AddAnAppFragment extends Fragment {
 
                                     appI.setImageBitmap(null);
                                     appB.setImageBitmap(null);
-                                    fm.beginTransaction()
-                                            .setReorderingAllowed(true)
+                                    fm.beginTransaction().setReorderingAllowed(true).addToBackStack("MyApps")
                                             .replace(R.id.fragmentContainer, AppDetailsFragment.class, b)
                                             .commit();
 
                                 } else {
-                                    Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),message.getMessage());
+                                    Error.displayErrorMessage(view.findViewById(R.id.errorText2), getContext(), message.getMessage());
                                 }
 
 
@@ -190,7 +188,7 @@ public class AddAnAppFragment extends Fragment {
                         public void onFailure(Call<Message> call, Throwable t) {
                             t.printStackTrace();
                             if (loader.isLoading) {
-                                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Request TimeOut");
+                                Error.displayErrorMessage(view.findViewById(R.id.errorText2), getContext(), "Request TimeOut");
                                 loader.dismiss();
                             }
                         }
@@ -236,7 +234,7 @@ public class AddAnAppFragment extends Fragment {
                                     loader.dismiss();
                                 }
 
-                                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Image Cannot be load");
+                                Error.displayErrorMessage(view.findViewById(R.id.errorText2), getContext(), "Image Cannot be load");
 
                             }
                         });
@@ -271,7 +269,7 @@ public class AddAnAppFragment extends Fragment {
                                 if (loader.isLoading) {
                                     loader.dismiss();
                                 }
-                                Error.displayErrorMessage(view.findViewById(R.id.errorText2),getContext(),"Image Cannot be load");
+                                Error.displayErrorMessage(view.findViewById(R.id.errorText2), getContext(), "Image Cannot be load");
 
                             }
                         });

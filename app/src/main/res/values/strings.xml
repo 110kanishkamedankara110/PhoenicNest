@@ -40,7 +40,7 @@
     <string name="Publish_new_app">Publish New App</string>
     <string name="create_a_app">Create a App</string>
     <string name="app_title">App Title</string>
-    <string name="pakage_structure">Pakage Structure</string>
+    <string name="pakage_structure">Package Structure</string>
     <string name="next">Next</string>
     <string name="cancel">Cancel</string>
     <string name="app_icon">App Icon</string>
@@ -48,7 +48,7 @@
     <string name="new_release">New Release</string>
     <string name="version">Version</string>
     <string name="version_code">Version Code</string>
-    <string name="screen_shots">Screen Shots</string>
+    <string name="screen_shots">Screenshots</string>
     <string name="previous">Previous</string>
     <string name="publish">Publish</string>
     <string name="add_apk_file">Add Apk FIle</string>

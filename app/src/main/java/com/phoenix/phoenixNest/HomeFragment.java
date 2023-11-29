@@ -247,7 +247,7 @@ public class HomeFragment extends Fragment {
                     b.putString("name", String.valueOf(name[pos]));
 
                     fm.beginTransaction()
-                            .setReorderingAllowed(true).addToBackStack("singleView")
+                            .setReorderingAllowed(true).addToBackStack("SingleView")
                             .replace(R.id.fragmentContainer, SingleViewFragment.class, b)
                             .commit();
 

@@ -171,7 +171,7 @@ public class DrawerFragmernt extends Fragment {
             public void onClick(View v) {
 
                 fm.beginTransaction()
-                        .setReorderingAllowed(true).addToBackStack("My Apps")
+                        .setReorderingAllowed(true).addToBackStack("MyApps")
                         .replace(R.id.fragmentContainer, MyApps.class, null)
                         .commit();
             }
@@ -182,7 +182,7 @@ public class DrawerFragmernt extends Fragment {
                 Bundle b = new Bundle();
                 b.putString("title", "My Apps");
                 fm.beginTransaction()
-                        .setReorderingAllowed(true).addToBackStack("My Profile")
+                        .setReorderingAllowed(true).addToBackStack("MyProfile")
                         .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
                         .commit();
             }
@@ -191,7 +191,7 @@ public class DrawerFragmernt extends Fragment {
             @Override
             public void onClick(View v) {
                 fm.beginTransaction()
-                        .setReorderingAllowed(true)
+                        .setReorderingAllowed(true).addToBackStack("Home")
                         .replace(R.id.fragmentContainer, HomeFragment.class, null)
                         .commit();
             }

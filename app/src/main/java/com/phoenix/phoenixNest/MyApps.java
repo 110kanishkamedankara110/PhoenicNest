@@ -82,7 +82,7 @@ public class MyApps extends Fragment {
             @Override
             public void onClick(View v) {
                 fm.beginTransaction()
-                        .setReorderingAllowed(true).addToBackStack("add Apps")
+                        .setReorderingAllowed(true).addToBackStack("AddApps")
                         .replace(R.id.fragmentContainer, AddAnAppFragment.class, null)
                         .commit();
             }
@@ -208,7 +208,7 @@ public class MyApps extends Fragment {
                             b.putStringArrayList("category",(ArrayList<String>)app.getCategoryies());
                         }
                         fm.beginTransaction()
-                                .setReorderingAllowed(true).addToBackStack("MyApps")
+                                .setReorderingAllowed(true).addToBackStack("AppDetails")
                                 .replace(R.id.fragmentContainer, AppDetailsFragment.class,b)
                                 .commit();
 

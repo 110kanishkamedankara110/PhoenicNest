@@ -119,7 +119,7 @@
             </HorizontalScrollView>
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/publish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -135,7 +135,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/prev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -145,13 +145,13 @@
                 android:text="@string/previous"
                 android:textColor="@drawable/button_text_color"
                 app:backgroundTint="@null"
-                app:layout_constraintBottom_toBottomOf="@+id/button7"
-                app:layout_constraintEnd_toStartOf="@+id/button7"
-                app:layout_constraintTop_toTopOf="@+id/button7"
+                app:layout_constraintBottom_toBottomOf="@+id/canclePublish"
+                app:layout_constraintEnd_toStartOf="@+id/canclePublish"
+                app:layout_constraintTop_toTopOf="@+id/canclePublish"
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/canclePublish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -160,9 +160,9 @@
                 android:text="@string/cancel"
                 android:textColor="@drawable/light_button_text"
                 app:backgroundTint="@null"
-                app:layout_constraintBottom_toBottomOf="@+id/button6"
-                app:layout_constraintEnd_toStartOf="@+id/button6"
-                app:layout_constraintTop_toTopOf="@+id/button6"
+                app:layout_constraintBottom_toBottomOf="@+id/publish"
+                app:layout_constraintEnd_toStartOf="@+id/publish"
+                app:layout_constraintTop_toTopOf="@+id/publish"
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton

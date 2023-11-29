@@ -2,11 +2,13 @@ package com.phoenix.phoenixNest.util;
 
 import com.phoenix.phoenixNest.dto.AppDetailsDto;
 import com.phoenix.phoenixNest.dto.AppMain;
+import com.phoenix.phoenixNest.dto.AppReleaseDto;
 import com.phoenix.phoenixNest.dto.Message;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -29,4 +31,8 @@ public interface AddAppService {
     Call<Message> addAppDetails(@Body AppDetailsDto appDetailsDto);
     @POST("app/updateAppDetails")
     Call<Message> updateAppDetails(@Body AppDetailsDto appDetailsDto);
+
+    @POST("app/release")
+    @Multipart
+    Call<Message> addAppRelease(@Part MultipartBody.Part apk,@Part List<MultipartBody.Part> screenshots, @Part("appRelease") AppReleaseDto appRelease);
 }

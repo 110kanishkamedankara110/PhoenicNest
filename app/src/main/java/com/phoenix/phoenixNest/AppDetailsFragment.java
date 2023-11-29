@@ -239,10 +239,8 @@ public class AppDetailsFragment extends Fragment {
         });
 
 
-        view.findViewById(R.id.cancelAppAdd2).setOnClickListener(v -> fm.beginTransaction()
-                .replace(R.id.fragmentContainer, MyApps.class, null)
-                .commit());
-
+        view.findViewById(R.id.cancelAppAdd2).setOnClickListener(v ->
+                fm.popBackStack());
         view.findViewById(R.id.nextappAdd2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -353,7 +351,7 @@ public class AppDetailsFragment extends Fragment {
 
                     //redirect to add relese page
                     fm.beginTransaction()
-                            .setReorderingAllowed(true).addToBackStack("AppDetails")
+                            .setReorderingAllowed(true).addToBackStack("Release")
                             .replace(R.id.fragmentContainer, AppRelseaseFragment.class, extra)
                             .commit();
 

@@ -483,10 +483,6 @@ public class UserProfileFragment extends Fragment {
                                                         if(loader2.isLoading){
                                                             loader2.dismiss();
                                                         }
-                                                        fm.beginTransaction()
-                                                                .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
-                                                                .commit();
-
                                                     }
                                                 }
                                             });
