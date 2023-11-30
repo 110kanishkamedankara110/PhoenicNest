@@ -1,9 +1,16 @@
 package com.phoenix.phoenixNest;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -48,6 +55,8 @@ public class AppDetailsFragment extends Fragment {
     Bundle extra;
     String[] categoryies;
     List<String> selectedCat;
+
+    NotificationManager notificationManager;
 
     public AppDetailsFragment() {
 
@@ -239,8 +248,24 @@ public class AppDetailsFragment extends Fragment {
         });
 
 
-        view.findViewById(R.id.cancelAppAdd2).setOnClickListener(v ->
-                fm.popBackStack());
+        view.findViewById(R.id.cancelAppAdd2).setOnClickListener(v -> {
+            Intent i = new Intent(getActivity(), HomeActivity.class);
+            extra.putString("fragment","AddDetailsFragment");
+            i.putExtras(extra);
+            PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, i, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+
+            notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification notification = new NotificationCompat.Builder(getActivity().getApplicationContext(), getActivity().getString(R.string.channelName))
+                    .setSmallIcon(R.drawable.logo)
+                    .setContentTitle("App Details Add")
+                    .setContentText("Continue Adding App Details")
+                    .setColor(Color.RED)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
+                    .build();
+            notificationManager.notify(1, notification);
+            fm.popBackStack();
+        });
         view.findViewById(R.id.nextappAdd2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

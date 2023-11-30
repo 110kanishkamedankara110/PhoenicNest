@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.KeyEvent;
@@ -37,10 +40,27 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent i = getIntent();
+        Bundle ex = i.getExtras();
+        if (ex != null) {
+            if (ex.getString("fragment").equals("AddDetailsFragment")) {
+
+                getSupportFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true).addToBackStack("AppDetails")
+                        .replace(R.id.fragmentContainer, AppDetailsFragment.class, ex)
+                        .commit();
+            }else if(ex.getString("fragment").equals("AppRelease")){
+                getSupportFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true).addToBackStack("Release")
+                        .replace(R.id.fragmentContainer, AppRelseaseFragment.class, ex)
+                        .commit();
+            }
+        }
         setContentView(R.layout.activity_home);
         StatusBar.hideStatusBar(this);
 
-       LoadingFragment loader=LoadingFragment.getLoader();
+        LoadingFragment loader = LoadingFragment.getLoader();
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -49,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
         if (user != null) {
             user.reload();
             user = mAuth.getCurrentUser();
-            loader.show(getSupportFragmentManager(),"Loader");
+            loader.show(getSupportFragmentManager(), "Loader");
             db.collection("user").document(user.getUid())
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

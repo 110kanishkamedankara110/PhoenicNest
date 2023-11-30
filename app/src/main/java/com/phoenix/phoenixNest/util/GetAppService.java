@@ -14,5 +14,9 @@ public interface GetAppService {
     @GET("app/getApps/{user}")
     Call<List<AppDto>> getApps(@Path("user") String user);
 
+    @GET("app/getAllApps")
+    Call<List<AppDto>> getAllApps();
 
+    @GET("app/getAllApps/{key}")
+    Call<List<AppDto>> getAllApps(@Path("key") String key);
 }

@@ -8,7 +8,44 @@ public class AppDto {
     private String mainActivity;
     private String description;
     private List<String> categoryies;
+
+    private String versionCode;
+    private String version;
+    private List<String> screenShots;
+    private String apk;
     private String appIcon;
+
+    public String getVersionCode() {
+        return versionCode;
+    }
+
+    public void setVersionCode(String versionCode) {
+        this.versionCode = versionCode;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public List<String> getScreenShots() {
+        return screenShots;
+    }
+
+    public void setScreenShots(List<String> screenShots) {
+        this.screenShots = screenShots;
+    }
+
+    public String getApk() {
+        return apk;
+    }
+
+    public void setApk(String apk) {
+        this.apk = apk;
+    }
 
     private int width;
     private int height;

@@ -65,12 +65,16 @@ public class MyApps extends Fragment {
         return inflater.inflate(com.phoenix.phoenicnest.R.layout.fragment_my_apps, container, false);
     }
 
+
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
         v=view;
         fm = getActivity().getSupportFragmentManager();
+
 
         loadMyApps();
 
@@ -87,7 +91,7 @@ public class MyApps extends Fragment {
                         .commit();
             }
         });
-
+        fm.popBackStack("MyApps",0);
     }
 
     private void loadMyApps() {

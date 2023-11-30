@@ -1,7 +1,12 @@
 package com.phoenix.phoenixNest;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,6 +17,7 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -24,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.flexbox.FlexboxLayout;
 import com.phoenix.phoenicnest.R;
 import com.phoenix.phoenixNest.dto.AppReleaseDto;
 import com.phoenix.phoenixNest.dto.Message;
@@ -37,14 +42,10 @@ import com.phoenix.phoenixNest.util.ListWithListener;
 import com.phoenix.phoenixNest.util.Part;
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,7 +61,7 @@ public class AppRelseaseFragment extends Fragment {
 
     int maxItems = 4;
     Uri apk;
-
+    NotificationManager notificationManager;
     public AppRelseaseFragment() {
         // Required empty public constructor
     }
@@ -102,7 +103,7 @@ public class AppRelseaseFragment extends Fragment {
                         .load((Uri) item)
                         .resize(100, 200)
                         .centerCrop()
-                        .into((ImageView) cat.findViewById(R.id.ssImage));
+                        .into((ImageView) cat.findViewById(R.id.ssImage1));
 
                 ib.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -201,7 +202,29 @@ public class AppRelseaseFragment extends Fragment {
         view.findViewById(R.id.canclePublish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fm.popBackStack("MyApps",0);
+                Intent i = new Intent(getActivity(), HomeActivity.class);
+                extra.putString("fragment","AppRelease");
+                i.putExtras(extra);
+
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, i, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+
+                notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                Notification notification = new NotificationCompat.Builder(getActivity().getApplicationContext(), getActivity().getString(R.string.channelName))
+                        .setSmallIcon(R.drawable.logo)
+                        .setContentTitle("App Release")
+                        .setContentText("Finish Up Releasing Your App")
+                        .setColor(Color.RED)
+                        .setAutoCancel(true)
+                        .setContentIntent(pendingIntent)
+                        .build();
+                notificationManager.notify(2, notification);
+                if(!fm.popBackStackImmediate("MyApps",0)){
+                    fm.popBackStack();
+                }
+
+
+
 
             }
         });

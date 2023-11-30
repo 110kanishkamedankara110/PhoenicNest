@@ -53,6 +53,8 @@
     <string name="publish">Publish</string>
     <string name="add_apk_file">Add Apk FIle</string>
     <string name="no_file_selected">No FIle Selected</string>
+    <string name="channelName">MessageChannel</string>
+    <string name="channelDescription">Display Clickable Messages</string>
 
 
 </resources>

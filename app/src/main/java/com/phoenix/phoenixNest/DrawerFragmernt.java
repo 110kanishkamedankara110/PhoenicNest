@@ -169,11 +169,16 @@ public class DrawerFragmernt extends Fragment {
         view.findViewById(R.id.myapps).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fragment fragment =
+                        fm.findFragmentById(R.id.fragmentContainer);
+                if(!(fragment instanceof MyApps)){
+                    fm.beginTransaction()
+                            .setReorderingAllowed(true).addToBackStack("MyApps")
+                            .replace(R.id.fragmentContainer, MyApps.class, null)
+                            .commit();
+                }
 
-                fm.beginTransaction()
-                        .setReorderingAllowed(true).addToBackStack("MyApps")
-                        .replace(R.id.fragmentContainer, MyApps.class, null)
-                        .commit();
+
             }
         });
         view.findViewById(R.id.myprofile).setOnClickListener(new View.OnClickListener() {
@@ -181,19 +186,27 @@ public class DrawerFragmernt extends Fragment {
             public void onClick(View v) {
                 Bundle b = new Bundle();
                 b.putString("title", "My Apps");
-                fm.beginTransaction()
-                        .setReorderingAllowed(true).addToBackStack("MyProfile")
-                        .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
-                        .commit();
+                Fragment fragment =
+                        fm.findFragmentById(R.id.fragmentContainer);
+                if(!(fragment instanceof UserProfileFragment)) {
+                    fm.beginTransaction()
+                            .setReorderingAllowed(true).addToBackStack("MyProfile")
+                            .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
+                            .commit();
+                }
             }
         });
         view.findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fm.beginTransaction()
-                        .setReorderingAllowed(true).addToBackStack("Home")
-                        .replace(R.id.fragmentContainer, HomeFragment.class, null)
-                        .commit();
+                Fragment fragment =
+                        fm.findFragmentById(R.id.fragmentContainer);
+                if(!(fragment instanceof HomeFragment)) {
+                    fm.beginTransaction()
+                            .setReorderingAllowed(true).addToBackStack("Home")
+                            .replace(R.id.fragmentContainer, HomeFragment.class, null)
+                            .commit();
+                }
             }
         });
 
