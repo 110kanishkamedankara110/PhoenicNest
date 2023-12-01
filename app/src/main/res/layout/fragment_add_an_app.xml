@@ -7,160 +7,167 @@
     android:backgroundTint="@color/lightG"
     tools:context="com.phoenix.phoenixNest.AddAnAppFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
-        <EditText
-            android:id="@+id/appTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/border"
-            android:ems="10"
-            android:hint="@string/app_title"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/errorText2"
-            tools:ignore="Autofill,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/pkgStr"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/border"
-            android:ems="10"
-            android:hint="@string/pakage_structure"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/appTitle"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/appTitle"
-            app:layout_constraintTop_toBottomOf="@+id/appTitle"
-            tools:ignore="Autofill,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+            <EditText
+                android:id="@+id/appTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/app_title"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/errorText2"
+                tools:ignore="Autofill,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
-        <EditText
-            android:id="@+id/mainAct"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/border"
-            android:ems="10"
-            android:hint="Main Activity name"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/pkgStr"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/pkgStr"
-            app:layout_constraintTop_toBottomOf="@+id/pkgStr"
-            tools:ignore="Autofill,HardcodedText,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+            <EditText
+                android:id="@+id/pkgStr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/pakage_structure"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="@+id/appTitle"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/appTitle"
+                app:layout_constraintTop_toBottomOf="@+id/appTitle"
+                tools:ignore="Autofill,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/create_a_app"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.069"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/mainAct"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="Main Activity name"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="@+id/pkgStr"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/pkgStr"
+                app:layout_constraintTop_toBottomOf="@+id/pkgStr"
+                tools:ignore="Autofill,HardcodedText,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
-        <Button
-            android:id="@+id/nextappAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/create_a_app"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.069"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/nextappAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
 
 
-            android:background="@drawable/button"
-            android:text="@string/next"
-            android:textColor="@drawable/button_text_color"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/mainAct"
-            app:layout_constraintTop_toBottomOf="@+id/appicon"
-            app:layout_constraintVertical_bias="1.0" />
+                android:background="@drawable/button"
+                android:text="@string/next"
+                android:textColor="@drawable/button_text_color"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/mainAct"
+                app:layout_constraintTop_toTopOf="@+id/cancelAppAdd"
+                app:layout_constraintVertical_bias="1.0" />
 
-        <Button
-            android:id="@+id/cancelAppAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/cancelAppAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="100dp"
-            android:background="@drawable/light_button"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="100dp"
 
-            android:text="@string/cancel"
-            android:textColor="@drawable/light_button_text"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/nextappAdd"
-            app:layout_constraintTop_toBottomOf="@+id/appicon"
-            app:layout_constraintVertical_bias="1.0" />
+                android:background="@drawable/light_button"
+                android:text="@string/cancel"
+                android:textColor="@drawable/light_button_text"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/nextappAdd"
+                app:layout_constraintTop_toBottomOf="@+id/textView17"
+                app:layout_constraintVertical_bias="1.0" />
 
-        <ImageButton
-            android:id="@+id/appicon"
-            android:layout_width="79dp"
-            android:layout_height="76dp"
-            android:background="@drawable/button"
-            android:scaleType="centerCrop"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/appbanner"
-            app:layout_constraintStart_toStartOf="@+id/mainAct"
-            app:layout_constraintTop_toTopOf="@+id/appbanner"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+            <ImageButton
+                android:id="@+id/appicon"
+                android:layout_width="79dp"
+                android:layout_height="76dp"
+                android:background="@drawable/button"
+                android:scaleType="centerCrop"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/appbanner"
+                app:layout_constraintStart_toStartOf="@+id/mainAct"
+                app:layout_constraintTop_toTopOf="@+id/appbanner"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-        <ImageButton
-            android:id="@+id/appbanner"
-            android:layout_width="210dp"
-            android:layout_height="169dp"
-            android:background="@drawable/button_blue_default"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/mainAct"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/appicon"
-            app:layout_constraintTop_toBottomOf="@+id/mainAct"
-            app:layout_constraintVertical_bias="0.057"
-            tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
+            <ImageButton
+                android:id="@+id/appbanner"
+                android:layout_width="210dp"
+                android:layout_height="169dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_blue_default"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toEndOf="@+id/mainAct"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/appicon"
+                app:layout_constraintTop_toBottomOf="@+id/mainAct"
+                tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_icon"
-            app:layout_constraintEnd_toEndOf="@+id/appicon"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="@+id/appicon"
-            app:layout_constraintTop_toBottomOf="@+id/appicon" />
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_icon"
+                app:layout_constraintEnd_toEndOf="@+id/appicon"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="@+id/appicon"
+                app:layout_constraintTop_toBottomOf="@+id/appicon" />
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_banner"
-            app:layout_constraintEnd_toEndOf="@+id/appbanner"
-            app:layout_constraintHorizontal_bias="0.524"
-            app:layout_constraintStart_toStartOf="@+id/appbanner"
-            app:layout_constraintTop_toBottomOf="@+id/appbanner" />
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/app_banner"
+                app:layout_constraintEnd_toEndOf="@+id/appbanner"
+                app:layout_constraintHorizontal_bias="0.524"
+                app:layout_constraintStart_toStartOf="@+id/appbanner"
+                app:layout_constraintTop_toBottomOf="@+id/appbanner" />
 
-        <TextView
-            android:id="@+id/errorText2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/errorText2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </FrameLayout>

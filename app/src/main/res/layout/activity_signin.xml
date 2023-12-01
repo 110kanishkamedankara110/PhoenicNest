@@ -103,165 +103,170 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            tools:visibility="visible">
+            android:layout_height="match_parent" >
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/signin"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:visibility="visible"
+                tools:visibility="visible">
 
-            <EditText
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/signin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                android:id="@+id/email"
+                <EditText
 
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/border"
-                android:ems="10"
+                    android:id="@+id/email"
 
-                android:hint="@string/email"
-                android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
-                android:textSize="14sp"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/border"
+                    android:ems="10"
 
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/errorText"
-                tools:ignore="VisualLintTextFieldSize" />
+                    android:hint="@string/email"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:textSize="14sp"
 
-            <EditText
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/errorText"
+                    tools:ignore="VisualLintTextFieldSize" />
 
-                android:id="@+id/password"
+                <EditText
 
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/border"
-                android:ems="10"
-                android:hint="@string/password"
-                android:importantForAutofill="no"
+                    android:id="@+id/password"
 
-                android:inputType="textPassword"
-                android:textSize="14sp"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="@+id/email"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/email"
-                app:layout_constraintTop_toBottomOf="@+id/email"
-                tools:ignore="VisualLintTextFieldSize" />
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/border"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:importantForAutofill="no"
 
-            <EditText
-                android:id="@+id/password2"
+                    android:inputType="textPassword"
+                    android:textSize="14sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="@+id/email"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/email"
+                    app:layout_constraintTop_toBottomOf="@+id/email"
+                    tools:ignore="VisualLintTextFieldSize" />
 
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/border"
-                android:ems="10"
-                android:hint="@string/confirm_password"
+                <EditText
+                    android:id="@+id/password2"
 
-                android:importantForAutofill="no"
-                android:inputType="textPassword"
-                android:textSize="14sp"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="@+id/password"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/password"
-                app:layout_constraintTop_toBottomOf="@+id/password"
-                tools:ignore="VisualLintTextFieldSize" />
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/border"
+                    android:ems="10"
+                    android:hint="@string/confirm_password"
 
-            <Button
-                android:id="@+id/signIn"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:textSize="14sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="@+id/password"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/password"
+                    app:layout_constraintTop_toBottomOf="@+id/password"
+                    tools:ignore="VisualLintTextFieldSize" />
 
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="44dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/button"
-                android:text="@string/signin"
-                android:textColor="@color/white"
-                app:backgroundTint="@null"
-                app:layout_constraintEnd_toEndOf="@+id/password2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/password2"
-                app:layout_constraintTop_toBottomOf="@+id/password2"
+                <Button
+                    android:id="@+id/signIn"
 
-                tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintButtonSize" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/button"
+                    android:text="@string/signin"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="@+id/password2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/password2"
+                    app:layout_constraintTop_toBottomOf="@+id/password2"
 
-            <Button
-                android:id="@+id/login_button"
-                android:layout_width="117dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="32dp"
-                android:text="@string/login"
-                android:textColor="@color/buttonCol"
-                app:backgroundTint="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                    tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintButtonSize" />
 
-                app:layout_constraintEnd_toEndOf="@+id/signIn"
-                app:layout_constraintHorizontal_bias="0.619"
-                app:layout_constraintStart_toStartOf="@+id/signIn"
-                app:layout_constraintTop_toBottomOf="@+id/signIn"
+                <Button
+                    android:id="@+id/login_button"
+                    android:layout_width="117dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="@string/login"
+                    android:textColor="@color/buttonCol"
+                    app:backgroundTint="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
 
-                app:layout_constraintVertical_bias="0.096"
-                tools:ignore="TextContrastCheck" />
+                    app:layout_constraintEnd_toEndOf="@+id/signIn"
+                    app:layout_constraintHorizontal_bias="0.619"
+                    app:layout_constraintStart_toStartOf="@+id/signIn"
+                    app:layout_constraintTop_toBottomOf="@+id/signIn"
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="158dp"
-                android:layout_height="165dp"
-                android:layout_marginTop="88dp"
+                    app:layout_constraintVertical_bias="0.096"
+                    tools:ignore="TextContrastCheck" />
 
-                android:background="@drawable/circle"
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="158dp"
+                    android:layout_height="165dp"
+                    android:layout_marginTop="88dp"
 
-                android:backgroundTint="#8000FFE0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    android:background="@drawable/circle"
 
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="354dp"
-                android:layout_height="170dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintEnd_toEndOf="@+id/textView10"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/textView10"
-                app:layout_constraintVertical_bias="0.489"
-                app:srcCompat="@drawable/logo" />
-
-            <TextView
-                android:id="@+id/errorText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                    android:backgroundTint="#8000FFE0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="354dp"
+                    android:layout_height="170dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView10"
+                    app:layout_constraintEnd_toEndOf="@+id/textView10"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="@+id/textView10"
+                    app:layout_constraintTop_toTopOf="@+id/textView10"
+                    app:layout_constraintVertical_bias="0.489"
+                    app:srcCompat="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/errorText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </FrameLayout>
 

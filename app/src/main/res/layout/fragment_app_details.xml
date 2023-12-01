@@ -6,148 +6,154 @@
     android:layout_height="match_parent"
     tools:context="com.phoenix.phoenixNest.AppDetailsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="false">
+        android:layout_height="match_parent" >
 
-        <TextView
-            android:id="@+id/error4"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView28" />
+            android:clickable="false">
 
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/blue_squire"
-            android:backgroundTint="@color/lightG"
-            app:layout_constraintEnd_toEndOf="@+id/addButton"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/catView"
-            app:layout_constraintTop_toBottomOf="@+id/catView">
-
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/fb"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/error4"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                app:alignContent="stretch"
-                app:alignItems="stretch"
-                app:flexWrap="wrap"
-                app:justifyContent="flex_start">
+                android:layout_marginTop="16dp"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/blue_squire"
+                android:backgroundTint="@color/lightG"
+                app:layout_constraintEnd_toEndOf="@+id/addButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/catView"
+                app:layout_constraintTop_toBottomOf="@+id/catView">
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/fb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    app:alignContent="stretch"
+                    app:alignItems="stretch"
+                    app:flexWrap="wrap"
+                    app:justifyContent="flex_start">
 
 
-            </com.google.android.flexbox.FlexboxLayout>
-        </ScrollView>
+                </com.google.android.flexbox.FlexboxLayout>
+            </ScrollView>
 
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="App Details"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="App Details"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.047"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/appDetails"
-            android:layout_width="0dp"
-            android:layout_height="216dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/border"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Description"
-            android:inputType="textMultiLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/error4" />
+            <EditText
+                android:id="@+id/appDetails"
+                android:layout_width="0dp"
+                android:layout_height="216dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/error4" />
 
-        <TextView
-            android:id="@+id/textView31"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Category"
-            app:layout_constraintStart_toStartOf="@+id/appDetails"
-            app:layout_constraintTop_toBottomOf="@+id/appDetails" />
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Category"
+                app:layout_constraintStart_toStartOf="@+id/appDetails"
+                app:layout_constraintTop_toBottomOf="@+id/appDetails" />
 
-        <AutoCompleteTextView
-            android:id="@+id/catView"
-            android:layout_width="264dp"
-            android:layout_height="39dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/border"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/appDetails"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView31"
-            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+            <AutoCompleteTextView
+                android:id="@+id/catView"
+                android:layout_width="264dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/appDetails"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView31"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
-        <ImageButton
-            android:id="@+id/addButton"
-            android:layout_width="46dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="28dp"
-            android:background="@drawable/light_button"
-            android:src="@drawable/baseline_add_24"
-            app:layout_constraintBottom_toBottomOf="@+id/catView"
-            app:layout_constraintEnd_toEndOf="@+id/appDetails"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/catView"
-            app:layout_constraintTop_toTopOf="@+id/catView"
-            app:layout_constraintVertical_bias="0.0" />
+            <ImageButton
+                android:id="@+id/addButton"
+                android:layout_width="46dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="28dp"
+                android:background="@drawable/light_button"
+                android:src="@drawable/baseline_add_24"
+                app:layout_constraintBottom_toBottomOf="@+id/catView"
+                app:layout_constraintEnd_toEndOf="@+id/appDetails"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/catView"
+                app:layout_constraintTop_toTopOf="@+id/catView"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/nextappAdd2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="100dp"
-            android:text="@string/next"
-            android:background="@drawable/button"
-
-            android:textColor="@drawable/button_text_color"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/cancelAppAdd2"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_marginEnd="8dp"
-
-            android:background="@drawable/light_button"
-            android:text="@string/cancel"
-            android:textColor="@drawable/light_button_text"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/nextappAdd2"
-            app:layout_constraintEnd_toStartOf="@+id/nextappAdd2"
-            app:layout_constraintTop_toTopOf="@+id/nextappAdd2"
-            app:layout_constraintVertical_bias="0.0" />
+            <Button
+                android:id="@+id/nextappAdd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/button"
+                android:text="@string/next"
+
+                android:textColor="@drawable/button_text_color"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/cancelAppAdd2"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="8dp"
+
+                android:background="@drawable/light_button"
+                android:text="@string/cancel"
+                android:textColor="@drawable/light_button_text"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/nextappAdd2"
+                app:layout_constraintEnd_toStartOf="@+id/nextappAdd2"
+                app:layout_constraintTop_toTopOf="@+id/nextappAdd2"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </FrameLayout>

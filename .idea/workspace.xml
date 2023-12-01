@@ -10,25 +10,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5166fc09-e548-4ab6-afaf-be4ea42224a1" name="Changes" comment="appDetails,release app">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/ApkDownloadTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/Notifications.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/screen_shots.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/provider_paths.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/AppDetailsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/AppDetailsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/AppRelseaseFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/AppRelseaseFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/DrawerFragmernt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/DrawerFragmernt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/MyApps.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/MyApps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/app.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/SingleViewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/SingleViewFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/dto/AppDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/dto/AppDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/AddAppService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/AddAppService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/GetAppService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/util/GetAppService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_single_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_single_view.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/screen_shots_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/screen_shots_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_signin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_signin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_an_app.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_an_app.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_app_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_app_details.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +106,9 @@
       </list>
     </option>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/master" />
   </component>
@@ -127,6 +143,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ApkExportedModule": "PhoenicNest.app",
+    "BundleExportedModule": "PhoenicNest.app",
+    "ResourceManagerPrefKey.ResourceType": "DRAWABLE",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -135,6 +154,7 @@
     "android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout/2.1.4/27e12209e529970f69bc817f349c247ef238fae7/constraintlayout-2.1.4-sources.jar!/androidx/constraintlayout/widget/ConstraintLayout.java_SELECTED": "ConstraintLayout",
     "android-custom-viewC:/Users/BLACKBOX/AndroidStudioProjects/PhoenicNest/app/src/main/java/com/phoenix/phoenixNest/util/RoundedImageView.java_SELECTED": "RoundedImageView",
     "cidr.known.project.marker": "true",
+    "com.android.tools.idea.devicemanager.tab": "Physical",
     "com.google.services.firebase.aqiPopupShown": "true",
     "last_opened_file_path": "C:/Users/BLACKBOX/AndroidStudioProjects/Firebase",
     "project.structure.last.edited": "Dependencies",
@@ -166,11 +186,11 @@
       <recent name="com.phoenix.phoenicnest" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\main\res\xml" />
       <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\main\assets" />
       <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\androidTest\assets" />
       <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\main\res" />
       <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\main\res\config" />
-      <recent name="C:\Users\BLACKBOX\AndroidStudioProjects\PhoenicNest\app\src\main\res\values" />
     </key>
     <key name="android.template.-1046237455">
       <recent name="com.phoenix.phoenicnest" />
@@ -350,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701274249122</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="appDetails,release app">
+      <created>1701362068467</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1701362068467</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
