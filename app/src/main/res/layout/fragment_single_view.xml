@@ -28,14 +28,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/bg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="100dp"
+
+
                 android:background="@drawable/blue_squire"
-                android:backgroundTint="#C6C2C2"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +45,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/icon">
 
-                <Space
+                <androidx.legacy.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="80dp" />
 
@@ -55,7 +57,7 @@
                     android:textAlignment="center"
                     android:textSize="24sp" />
 
-                <Space
+                <androidx.legacy.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
@@ -66,7 +68,7 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="10dp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center" />
 
                 <Button
                     android:id="@+id/download"
@@ -74,25 +76,24 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
 
-                    android:text="@string/download"
                     android:background="@drawable/light_button"
-                    app:backgroundTint="@null"
+                    android:text="@string/download"
                     android:textColor="@drawable/light_button_text"
-                    />
+                    app:backgroundTint="@null" />
 
-                <Space
+                <androidx.legacy.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="30dp" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/laable1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="Images"
                     android:textSize="24sp" />
 
-                <Space
+                <androidx.legacy.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
@@ -159,19 +160,19 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
-                <Space
+                <androidx.legacy.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/laable2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="@string/description"
                     android:textSize="24sp" />
 
-                <Space
+                <androidx.legacy.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
@@ -192,7 +193,7 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="184dp"
                 android:background="@drawable/blue_squire"
-                android:backgroundTint="#494646"
+                android:backgroundTint="@color/white"
                 android:outlineAmbientShadowColor="#050303"
                 android:outlineSpotShadowColor="#070404"
                 android:scaleType="centerCrop"

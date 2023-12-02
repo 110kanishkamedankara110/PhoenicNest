@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.phoenix.phoenicnest.R;
 import com.phoenix.phoenixNest.dto.AppDto;
+import com.phoenix.phoenixNest.util.CategoryService;
 import com.phoenix.phoenixNest.util.Env;
 import com.phoenix.phoenixNest.util.GetAppService;
 import com.squareup.picasso.Picasso;
@@ -32,12 +32,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+public class CategoryAppList extends Fragment {
 
-public class Search extends Fragment {
-
+    Bundle extra;
+    List<AppDto> apps;
 
     FragmentManager fm;
-    List<AppDto> apps;
+
+    public CategoryAppList() {
+        // Required empty public constructor
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,33 +52,32 @@ public class Search extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(com.phoenix.phoenicnest.R.layout.fragment_search, container, false);
+
+        return inflater.inflate(R.layout.fragment_category_app_list, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        extra = getArguments();
         fm = getActivity().getSupportFragmentManager();
-        view.findViewById(R.id.SearchButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText textFiled=view.findViewById(R.id.search_filed);
-                search(view,textFiled.getText().toString());
-            }
-        });
+        TextView tv = view.findViewById(R.id.categoryTitle);
+        tv.setText(extra.getString("category"));
 
+        load(view);
 
     }
 
 
-    private void search(View container, String key) {
+    private void load(View container) {
         LoadingFragment loader = LoadingFragment.getLoader();
         if (!loader.isLoading) {
             loader.show(fm, "Loader");
         }
         Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(Env.get(getContext(), "app.url")).build();
-        GetAppService getAppService = retrofit.create(GetAppService.class);
-        Call<List<AppDto>> call = getAppService.getAllApps(key);
+        CategoryService categoryService = retrofit.create(CategoryService.class);
+        Call<List<AppDto>> call = categoryService.getCategoryApps(extra.getString("category"));
 
         call.enqueue(new Callback<List<AppDto>>() {
             @Override
@@ -82,10 +85,10 @@ public class Search extends Fragment {
                 if (response.isSuccessful()) {
                     System.out.println("sucess................");
                     apps = response.body();
-                    RecyclerView rec = container.findViewById(R.id.searchAppsList);
+                    RecyclerView rec = container.findViewById(R.id.categoryApps);
                     StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
                     rec.setLayoutManager(staggeredGridLayoutManager);
-                    rec.setAdapter(new Search.Adapter());
+                    rec.setAdapter(new CategoryAppList.Adapter());
 
                 }
                 if (loader.isLoading) {
@@ -124,18 +127,18 @@ public class Search extends Fragment {
     }
 
 
-    class Adapter extends RecyclerView.Adapter<Search.Vh> {
+    class Adapter extends RecyclerView.Adapter<CategoryAppList.Vh> {
 
         @NonNull
         @Override
-        public Search.Vh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public CategoryAppList.Vh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inf = LayoutInflater.from(parent.getContext());
             View v = inf.inflate(R.layout.layout_item, parent, false);
-            return new Search.Vh(v);
+            return new CategoryAppList.Vh(v);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull Search.Vh holder, int position) {
+        public void onBindViewHolder(@NonNull CategoryAppList.Vh holder, int position) {
 
             int pos = position;
             holder.tw.post(new Runnable() {

@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3C000000"
+    android:background="#97000000"
     android:backgroundTint="#070404"
     tools:context="com.phoenix.phoenixNest.Search">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="10dp">
 
         <EditText
             android:id="@+id/search_filed"
-            android:layout_width="256dp"
+            android:layout_width="0dp"
             android:layout_height="39dp"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/border"
             android:ems="10"
             android:hint="Search"
@@ -26,26 +27,37 @@
             android:inputType="text"
             android:textSize="14sp"
             app:backgroundTint="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/SearchButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="VisualLintTextFieldSize" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/SearchButton"
             android:layout_width="wrap_content"
             android:layout_height="39dp"
 
-            android:text="Search"
             android:background="@drawable/light_button"
-            app:backgroundTint="@null"
+            android:text="Search"
             android:textColor="@drawable/light_button_text"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="@+id/search_filed"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
-            app:layout_constraintStart_toEndOf="@+id/search_filed"
             app:layout_constraintTop_toTopOf="@+id/search_filed"
             app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchAppsList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/SearchButton"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/search_filed"
+            app:layout_constraintTop_toBottomOf="@+id/search_filed"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

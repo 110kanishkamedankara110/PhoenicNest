@@ -1,6 +1,7 @@
 package com.phoenix.phoenixNest.dto;
 
 import java.util.List;
+import java.util.Map;
 
 public class AppDto {
     private String packageName;
@@ -14,6 +15,25 @@ public class AppDto {
     private List<String> screenShots;
     private String apk;
     private String appIcon;
+
+    private String  maxColor;
+    private String  minColor;
+
+    public String getMinColor() {
+        return minColor;
+    }
+
+    public void setMinColor(String minColor) {
+        this.minColor = minColor;
+    }
+
+    public String getMaxColor() {
+        return maxColor;
+    }
+
+    public void setMaxColor(String maxColor) {
+        this.maxColor = maxColor;
+    }
 
     public String getVersionCode() {
         return versionCode;

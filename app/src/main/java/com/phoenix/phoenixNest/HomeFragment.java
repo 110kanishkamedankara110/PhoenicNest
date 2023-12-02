@@ -1,8 +1,6 @@
 package com.phoenix.phoenixNest;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +30,6 @@ import com.phoenix.phoenixNest.util.Env;
 import com.phoenix.phoenixNest.util.GetAppService;
 import com.phoenix.phoenixNest.util.Notifications;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,6 +114,8 @@ public class HomeFragment extends Fragment {
                 LinearLayout l = container.findViewById(R.id.categorytext);
                 categoryDtos.forEach(c -> {
 
+
+
                     LayoutInflater inf = LayoutInflater.from(container.getContext());
 
                     View v = inf.inflate(R.layout.category_card, l, false);
@@ -127,20 +125,23 @@ public class HomeFragment extends Fragment {
                     TextView co = v.findViewById(R.id.count);
                     Picasso.get()
                             .load(Uri.parse(Env.get(getContext(), "app.url") + "image/category/" + c.getImages().get(0)))
-                            .into(iw, new com.squareup.picasso.Callback() {
-                                @Override
-                                public void onSuccess() {
-
-                                }
-
-                                @Override
-                                public void onError(Exception e) {
-                                    e.printStackTrace();
-                                }
-                            });
-
-
+                            .into(iw);
+                    co.setText(String.valueOf(c.getAppCount()));
                     l.addView(v);
+
+                    v.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle b=new Bundle();
+                            b.putString("category",c.getCategory());
+                            fm.beginTransaction()
+                                    .setReorderingAllowed(true).addToBackStack("Category")
+                                    .replace(R.id.fragmentContainer, CategoryAppList.class,b)
+                                    .commit();
+                        }
+                    });
+
+
                 });
 
             }
@@ -278,6 +279,8 @@ public class HomeFragment extends Fragment {
 
                     Bundle b = new Bundle();
                     b.putString("packageName",app.getPackageName());
+                    b.putString("MaxColor", app.getMaxColor());
+                    b.putString("MinColor", app.getMinColor());
                     b.putStringArrayList("categoryies",(ArrayList<String>) app.getCategoryies());
                     b.putStringArrayList("screenshots",(ArrayList<String>)app.getScreenShots());
                     b.putString("appBanner",app.getAppBanner());

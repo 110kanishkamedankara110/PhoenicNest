@@ -13,7 +13,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -79,11 +81,24 @@ public class SingleViewFragment extends Fragment {
 
     }
 
+    public void getPermissions() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+        }
+
+
+        if (!getActivity().getPackageManager().canRequestPackageInstalls()) {
+            startActivity(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).setData(Uri.parse(String.format("package:%s", getContext().getPackageName()))), null);
+        }
+
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        getPermissions();
 
         Button dwb = view.findViewById(R.id.download);
         extra = getArguments();
@@ -92,6 +107,13 @@ public class SingleViewFragment extends Fragment {
         List<String> categoryies = extra.getStringArrayList("categoryies");
         List<String> screenshots = extra.getStringArrayList("screenshots");
         String appBanner = extra.getString("appBanner");
+        String maxColor = extra.getString("MaxColor");
+
+        String minColor = extra.getString("MinColor");
+
+        TextView appTitleView = view.findViewById(R.id.appTitle);
+        TextView descriptionView = view.findViewById(R.id.description);
+
         String appIcon = extra.getString("appIcon");
         String appDescription = extra.getString("appDescription");
         String version = extra.getString("version");
@@ -101,117 +123,52 @@ public class SingleViewFragment extends Fragment {
         int height = extra.getInt("height");
         String mainActivity = extra.getString("mainActivity");
 
+        LinearLayout bg = view.findViewById(R.id.bg);
+        maxColor = maxColor.replace("rgb(", "");
+        maxColor = maxColor.replace(")", "");
 
+        String[] maxCo = maxColor.split(",");
+
+        int red = Integer.parseInt(maxCo[0]);
+        int green = Integer.parseInt(maxCo[1]);
+        int blue = Integer.parseInt(maxCo[2]);
+
+        int maxc = Color.rgb(red, green, blue);
+        int minc = Color.rgb(255 - red, 255 - green, 255 - blue);
+
+        appTitleView.setTextColor(minc);
+        descriptionView.setTextColor(minc);
+
+        TextView laable1 = view.findViewById(R.id.laable1);
+        TextView laable2 = view.findViewById(R.id.laable2);
+
+        laable1.setTextColor(minc);
+        laable2.setTextColor(minc);
+
+        bg.setBackgroundTintList(ColorStateList.valueOf(maxc));
         PackageManager pm = getContext().getPackageManager();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 
-            try {
 
+        try {
+            long vc = 0;
+            long apkVc = 0;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 ApplicationInfo pi = pm.getApplicationInfo(packageName, PackageManager.ApplicationInfoFlags.of(0));
-                PackageInfo pii=pm.getPackageInfo(packageName,PackageManager.PackageInfoFlags.of(0));
-                long vc = pii.getLongVersionCode();
-                long apkVc = Long.parseLong(versionCode);
-                System.out.println(apkVc);
-                if (vc < apkVc) {
-                    dwb.setText("Update");
-                    dwb.setEnabled(true);
-                    dwb.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            url = (Env.get(getContext(), "app.url") + "app/download/" + packageName + "/" + versionCode + "/" + apk);
-                            Uri uri = Uri.parse(url);
+                PackageInfo pii = pm.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0));
+                vc = pii.getLongVersionCode();
+                apkVc = Long.parseLong(versionCode);
 
-
-                            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-                                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-
-                            } else {
-                                dwb.setText("Downloading...");
-                                dwb.setEnabled(false);
-                                downloadId = download(uri, appTitle, apk);
-                            }
-                        }
-                    });
-                } else {
-                    dwb.setText("Open");
-                    dwb.setEnabled(true);
-
-                    dwb.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent launchIntent = getContext().getPackageManager().getLaunchIntentForPackage(packageName);
-
-                            getContext().startActivity(launchIntent);
-                        }
-                    });
-                }
-
-
-            } catch (PackageManager.NameNotFoundException e) {
-                dwb.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        url = (Env.get(getContext(), "app.url") + "app/download/" + packageName + "/" + versionCode + "/" + apk);
-                        Uri uri = Uri.parse(url);
-
-
-                        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-
-                        } else {
-                            dwb.setText("Downloading...");
-                            dwb.setEnabled(false);
-                            downloadId = download(uri, appTitle, apk);
-                        }
-                    }
-                });
-            }
-        } else {
-            try {
-
+            } else {
                 PackageInfo pi = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-                long vc = pi.getLongVersionCode();
-                long apkVc = Long.parseLong(versionCode);
-                System.out.println(apkVc);
-                if (vc < apkVc) {
-                    dwb.setText("Update");
-                    dwb.setEnabled(true);
-                    dwb.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            url = (Env.get(getContext(), "app.url") + "app/download/" + packageName + "/" + versionCode + "/" + apk);
-                            Uri uri = Uri.parse(url);
+                vc = pi.getLongVersionCode();
+                apkVc = Long.parseLong(versionCode);
+            }
 
+            if (vc < apkVc) {
 
-                            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-                                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-
-                            } else {
-                                dwb.setText("Downloading...");
-                                dwb.setEnabled(false);
-                                downloadId = download(uri, appTitle, apk);
-                            }
-                        }
-                    });
-                } else {
-                    dwb.setText("Open");
-                    dwb.setEnabled(true);
-
-                    dwb.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent launchIntent = getContext().getPackageManager().getLaunchIntentForPackage(packageName);
-
-                            getContext().startActivity(launchIntent);
-                        }
-                    });
-                }
-
-
-            } catch (PackageManager.NameNotFoundException e) {
+                dwb.setText("Update");
+                dwb.setEnabled(true);
                 dwb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -226,18 +183,54 @@ public class SingleViewFragment extends Fragment {
                         } else {
                             dwb.setText("Downloading...");
                             dwb.setEnabled(false);
-                            downloadId = download(uri, appTitle, apk);
+                            downloadId = download(uri, appTitle, apk, version, versionCode);
                         }
                     }
                 });
+
+            } else {
+
+                dwb.setText("Open");
+                dwb.setEnabled(true);
+
+                dwb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent launchIntent = getContext().getPackageManager().getLaunchIntentForPackage(packageName);
+
+                        getContext().startActivity(launchIntent);
+                    }
+                });
             }
+
+
+        } catch (PackageManager.NameNotFoundException e) {
+            dwb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    url = (Env.get(getContext(), "app.url") + "app/download/" + packageName + "/" + versionCode + "/" + apk);
+                    Uri uri = Uri.parse(url);
+
+
+                    if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+
+                    } else {
+                        dwb.setText("Downloading...");
+                        dwb.setEnabled(false);
+                        downloadId = download(uri, appTitle, apk, version, versionCode);
+                    }
+                }
+            });
+
         }
 
 
         BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
+                getPermissions();
 
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 System.out.println(id + " " + downloadId);
@@ -255,28 +248,9 @@ public class SingleViewFragment extends Fragment {
                                     int uriIndex = c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
                                     String downloadedUriString = c.getString(uriIndex);
 
-                                    // Now you have the URI of the downloaded file
+
                                     Uri downloadedUri = Uri.parse(downloadedUriString);
 
-
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                        if (!getActivity().getPackageManager().canRequestPackageInstalls()) {
-
-
-                                            startActivityForResult(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).setData(Uri.parse(String.format("package:%s", getContext().getPackageName()))), 1234);
-                                        } else {
-                                        }
-                                    }
-
-                                    //Storage Permission
-
-                                    if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                                    }
-
-                                    if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                                    }
 
                                     String PATH = downloadedUri.getPath();
                                     File file = new File(PATH);
@@ -355,8 +329,6 @@ public class SingleViewFragment extends Fragment {
         getContext().registerReceiver(onInstallComplete, intentFilter);
 
 
-        TextView appTitleView = view.findViewById(R.id.appTitle);
-        TextView descriptionView = view.findViewById(R.id.description);
         ImageView banner = view.findViewById(R.id.banner);
         ImageView icon = view.findViewById(R.id.icon);
         icon.setClipToOutline(true);
@@ -377,6 +349,7 @@ public class SingleViewFragment extends Fragment {
             View ssView = LayoutInflater
                     .from(getContext())
                     .inflate(R.layout.screen_shots, ssLayput, false);
+            ssView.setClipToOutline(true);
             Picasso.get()
                     .load(Env.get(getContext(), "app.url") + "image/screenShot/" + packageName + "/" + versionCode + "/" + ss)
                     .into((ImageView) ssView.findViewById(R.id.ssImage1));
@@ -389,14 +362,15 @@ public class SingleViewFragment extends Fragment {
     }
 
 
-    private long download(Uri uri, String appTitle, String apk) {
+    private long download(Uri uri, String appTitle, String apk, String version, String versionCode) {
 
+        getPermissions();
 
         DownloadManager.Request request = new DownloadManager.Request(uri)
                 .setTitle(appTitle)
                 .setDescription("Downloading")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, apk)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "phoenixNest/" + appTitle + "V" + version + "( " + versionCode + " ).apk")
                 .setAllowedOverMetered(true)
                 .setMimeType("application/vnd.android.package-archive")
                 .setAllowedOverRoaming(true);

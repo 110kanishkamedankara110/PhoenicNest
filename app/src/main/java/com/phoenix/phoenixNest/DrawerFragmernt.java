@@ -185,7 +185,6 @@ public class DrawerFragmernt extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
-                b.putString("title", "My Apps");
                 Fragment fragment =
                         fm.findFragmentById(R.id.fragmentContainer);
                 if(!(fragment instanceof UserProfileFragment)) {

@@ -73,7 +73,13 @@ public class AddAnAppFragment extends Fragment {
         ((ImageView) view.findViewById(R.id.appbanner)).setClipToOutline(true);
 
         fm = getActivity().getSupportFragmentManager();
-        view.findViewById(R.id.cancelAppAdd).setOnClickListener(v -> fm.popBackStack());
+        view.findViewById(R.id.cancelAppAdd).setOnClickListener(v -> {
+            fm.beginTransaction()
+                    .setReorderingAllowed(true).addToBackStack("My Apps")
+                    .replace(R.id.fragmentContainer, MyApps.class, null)
+                    .commit();
+
+        });
 
         view.findViewById(R.id.nextappAdd).setOnClickListener(v -> {
 

@@ -219,10 +219,12 @@ public class AppRelseaseFragment extends Fragment {
                         .setContentIntent(pendingIntent)
                         .build();
                 notificationManager.notify(2, notification);
-                if(!fm.popBackStackImmediate("MyApps",0)){
-                    fm.popBackStack();
-                }
 
+                fm.beginTransaction()
+                        .setReorderingAllowed(true).addToBackStack("My Apps")
+                        .replace(R.id.fragmentContainer, MyApps.class, null)
+                        .commit();
+                
 
 
 
@@ -287,7 +289,12 @@ public class AppRelseaseFragment extends Fragment {
                                         version.setText("");
                                         versioNCode.setText("");
 
-                                        fm.popBackStack("MyApps",0);
+
+                                        fm.beginTransaction()
+                                                .setReorderingAllowed(true).addToBackStack("My Apps")
+                                                .replace(R.id.fragmentContainer, MyApps.class, null)
+                                                .commit();
+
 
 
                                     } else {

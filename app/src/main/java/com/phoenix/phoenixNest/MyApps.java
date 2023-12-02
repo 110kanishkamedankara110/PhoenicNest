@@ -1,9 +1,5 @@
 package com.phoenix.phoenixNest;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +22,8 @@ import com.phoenix.phoenixNest.dto.AppDto;
 import com.phoenix.phoenixNest.util.Env;
 import com.phoenix.phoenixNest.util.GetAppService;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -74,12 +67,13 @@ public class MyApps extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         v=view;
         fm = getActivity().getSupportFragmentManager();
+        System.out.println("focoused..................");
 
 
         loadMyApps();
 
         extra = getArguments();
-        ((TextView) view.findViewById(R.id.pageTitle)).setText("My Apps");
+        ((TextView) view.findViewById(R.id.categoryTitle)).setText("My Apps");
 
 
         view.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
@@ -91,7 +85,10 @@ public class MyApps extends Fragment {
                         .commit();
             }
         });
-        fm.popBackStack("MyApps",0);
+
+
+
+
     }
 
     private void loadMyApps() {
@@ -107,7 +104,7 @@ public class MyApps extends Fragment {
             public void onResponse(Call<List<AppDto>> call, Response<List<AppDto>> response) {
                 if (response.isSuccessful()) {
                     apps = response.body();
-                    RecyclerView rec =v.findViewById(R.id.itemView);
+                    RecyclerView rec =v.findViewById(R.id.categoryApps);
                     StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
                     rec.setLayoutManager(staggeredGridLayoutManager);
                     rec.setAdapter(new Adapter());

@@ -184,7 +184,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/day"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/year"
+                app:layout_constraintStart_toStartOf="@+id/resetpw"
                 app:layout_constraintTop_toBottomOf="@+id/resetpw"
                 app:layout_constraintVertical_bias="1.0"
                 tools:ignore="TextContrastCheck,VisualLintButtonSize" />
@@ -295,29 +295,29 @@
                 android:layout_width="98dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/border"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:inputType="number"
-                app:layout_constraintEnd_toEndOf="@+id/name"
-                app:layout_constraintHorizontal_bias="0.217"
-                app:layout_constraintStart_toEndOf="@+id/year"
-                app:layout_constraintTop_toBottomOf="@+id/textView41"
+                app:layout_constraintBottom_toBottomOf="@+id/year"
+                app:layout_constraintEnd_toStartOf="@+id/day"
+                app:layout_constraintTop_toBottomOf="@+id/textView40"
                 tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <EditText
                 android:id="@+id/year"
-                android:layout_width="130dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+
                 android:background="@drawable/border"
                 android:ems="10"
-
                 android:focusable="false"
                 android:inputType="date"
-                app:layout_constraintEnd_toEndOf="@+id/name"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toStartOf="@+id/month"
                 app:layout_constraintStart_toStartOf="@+id/textView39"
                 app:layout_constraintTop_toBottomOf="@+id/textView40"
                 tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -333,10 +333,9 @@
                 android:focusableInTouchMode="false"
                 android:importantForAutofill="no"
                 android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/month"
                 app:layout_constraintEnd_toEndOf="@+id/name"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/month"
-                app:layout_constraintTop_toBottomOf="@+id/textView42"
+                app:layout_constraintTop_toBottomOf="@+id/textView41"
                 tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <TextView

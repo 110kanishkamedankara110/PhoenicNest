@@ -264,7 +264,11 @@ public class AppDetailsFragment extends Fragment {
                     .setContentIntent(pendingIntent)
                     .build();
             notificationManager.notify(1, notification);
-            fm.popBackStack();
+            fm.beginTransaction()
+                    .setReorderingAllowed(true).addToBackStack("My Apps")
+                    .replace(R.id.fragmentContainer, MyApps.class, null)
+                    .commit();
+
         });
         view.findViewById(R.id.nextappAdd2).setOnClickListener(new View.OnClickListener() {
             @Override
