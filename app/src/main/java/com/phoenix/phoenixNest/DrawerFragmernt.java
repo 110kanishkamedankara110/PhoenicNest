@@ -1,34 +1,53 @@
 package com.phoenix.phoenixNest;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
 import com.phoenix.phoenicnest.R;
+import com.phoenix.phoenixNest.dto.User;
+
+import java.io.File;
 
 public class DrawerFragmernt extends Fragment {
     boolean viewShown = false;
     FirebaseAuth mAuth;
     FirebaseUser user;
     boolean searchVisible = false;
+
+    FirebaseFirestore db;
+    DocumentSnapshot ds;
     float height;
     float start;
     FragmentManager fm;
@@ -51,11 +70,50 @@ public class DrawerFragmernt extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
-        user=mAuth.getCurrentUser();
-        if(user==null){
-            LinearLayout l=getActivity().findViewById(R.id.UserContainer);
+        user = mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+
+        db.collection("user").document(user.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+
+                ds = snapshot;
+                if (snapshot != null && snapshot.exists()) {
+
+
+                } else {
+
+                    TextView myapps = view.findViewById(R.id.myapps);
+                    TextView downloades = view.findViewById(R.id.downloades);
+                    TextView notifications = view.findViewById(R.id.notifications);
+
+                    int col = R.color.textHint;
+                    if (myapps != null) {
+                        myapps.setClickable(false);
+                        myapps.setTextColor(ContextCompat.getColor(getContext(),col));
+                    }
+                    if (downloades != null) {
+                        downloades.setClickable(false);
+                        downloades.setTextColor(ContextCompat.getColor(getContext(),col));
+                    }
+                    if (notifications != null) {
+                        notifications.setClickable(false);
+                        notifications.setTextColor(ContextCompat.getColor(getContext(),col));
+                    }
+
+
+                }
+            }
+        });
+
+
+        if (user == null) {
+            LinearLayout l = getActivity().findViewById(R.id.UserContainer);
             l.setVisibility(View.GONE);
-            ((Button)view.findViewById(R.id.logout)).setText("Sign In");
+            ((Button) view.findViewById(R.id.logout)).setText("Sign In");
         }
         view.findViewById(R.id.guesture_bar).setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -171,7 +229,7 @@ public class DrawerFragmernt extends Fragment {
             public void onClick(View v) {
                 Fragment fragment =
                         fm.findFragmentById(R.id.fragmentContainer);
-                if(!(fragment instanceof MyApps)){
+                if (!(fragment instanceof MyApps)) {
                     fm.beginTransaction()
                             .setReorderingAllowed(true).addToBackStack("MyApps")
                             .replace(R.id.fragmentContainer, MyApps.class, null)
@@ -187,7 +245,7 @@ public class DrawerFragmernt extends Fragment {
                 Bundle b = new Bundle();
                 Fragment fragment =
                         fm.findFragmentById(R.id.fragmentContainer);
-                if(!(fragment instanceof UserProfileFragment)) {
+                if (!(fragment instanceof UserProfileFragment)) {
                     fm.beginTransaction()
                             .setReorderingAllowed(true).addToBackStack("MyProfile")
                             .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
@@ -195,12 +253,30 @@ public class DrawerFragmernt extends Fragment {
                 }
             }
         });
+
+        view.findViewById(R.id.downloades).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                File f = new File(Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DOWNLOADS + "/phoenixNest/");
+                System.out.println();
+                if (f.exists()) {
+                    Uri path = Uri.parse(f.getPath());
+                    intent.setDataAndType(path, "application/vnd.android.package-archive");
+                    getContext().startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "No Downloads", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         view.findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment =
                         fm.findFragmentById(R.id.fragmentContainer);
-                if(!(fragment instanceof HomeFragment)) {
+                if (!(fragment instanceof HomeFragment)) {
                     fm.beginTransaction()
                             .setReorderingAllowed(true).addToBackStack("Home")
                             .replace(R.id.fragmentContainer, HomeFragment.class, null)

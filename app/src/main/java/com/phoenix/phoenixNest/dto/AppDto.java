@@ -19,6 +19,12 @@ public class AppDto {
     private String  maxColor;
     private String  minColor;
 
+    private int downloads;
+
+    public int getDownloads() {
+        return downloads;
+    }
+
     public String getMinColor() {
         return minColor;
     }

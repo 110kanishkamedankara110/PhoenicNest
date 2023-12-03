@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.phoenix.phoenicnest.R;
 import com.phoenix.phoenixNest.dto.AppDto;
 import com.phoenix.phoenixNest.dto.CategoryDto;
+import com.phoenix.phoenixNest.util.AddAppService;
 import com.phoenix.phoenixNest.util.CategoryService;
 import com.phoenix.phoenixNest.util.Env;
 import com.phoenix.phoenixNest.util.GetAppService;
@@ -43,6 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
     List<AppDto> apps;
+    List<AppDto> popular;
     ViewGroup vg;
 
     FragmentManager fm;
@@ -76,7 +78,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
         Notifications.registerNotificationChannel(getActivity());
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -89,7 +90,6 @@ public class HomeFragment extends Fragment {
         setCategory(view);
         setPopular(view);
         loadMyApps(view);
-
 
 
     }
@@ -111,38 +111,39 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<CategoryDto>> call, Response<List<CategoryDto>> response) {
                 List<CategoryDto> categoryDtos = response.body();
-                LinearLayout l = container.findViewById(R.id.categorytext);
-                categoryDtos.forEach(c -> {
+                if (categoryDtos != null) {
+                    LinearLayout l = container.findViewById(R.id.categorytext);
+                    categoryDtos.forEach(c -> {
 
 
+                        LayoutInflater inf = LayoutInflater.from(container.getContext());
 
-                    LayoutInflater inf = LayoutInflater.from(container.getContext());
+                        View v = inf.inflate(R.layout.category_card, l, false);
+                        TextView tw = v.findViewById(R.id.cardTest);
+                        ImageView iw = v.findViewById(R.id.categoryImage);
+                        tw.setText(c.getCategory());
+                        TextView co = v.findViewById(R.id.count);
+                        Picasso.get()
+                                .load(Uri.parse(Env.get(getContext(), "app.url") + "image/category/" + c.getImages().get(0)))
+                                .into(iw);
+                        co.setText(String.valueOf(c.getAppCount()));
+                        l.addView(v);
 
-                    View v = inf.inflate(R.layout.category_card, l, false);
-                    TextView tw = v.findViewById(R.id.cardTest);
-                    ImageView iw = v.findViewById(R.id.categoryImage);
-                    tw.setText(c.getCategory());
-                    TextView co = v.findViewById(R.id.count);
-                    Picasso.get()
-                            .load(Uri.parse(Env.get(getContext(), "app.url") + "image/category/" + c.getImages().get(0)))
-                            .into(iw);
-                    co.setText(String.valueOf(c.getAppCount()));
-                    l.addView(v);
+                        v.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Bundle b = new Bundle();
+                                b.putString("category", c.getCategory());
+                                fm.beginTransaction()
+                                        .setReorderingAllowed(true).addToBackStack("Category")
+                                        .replace(R.id.fragmentContainer, CategoryAppList.class, b)
+                                        .commit();
+                            }
+                        });
 
-                    v.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Bundle b=new Bundle();
-                            b.putString("category",c.getCategory());
-                            fm.beginTransaction()
-                                    .setReorderingAllowed(true).addToBackStack("Category")
-                                    .replace(R.id.fragmentContainer, CategoryAppList.class,b)
-                                    .commit();
-                        }
+
                     });
-
-
-                });
+                }
 
             }
 
@@ -157,14 +158,82 @@ public class HomeFragment extends Fragment {
 
     private void setPopular(View container) {
         LinearLayout l = container.findViewById(R.id.popular);
-        for (int i = 0; i < 10; i++) {
-            LayoutInflater inf = LayoutInflater.from(container.getContext());
-            inf.inflate(R.layout.popular_card, l, true);
-        }
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Env.get(getContext(), "app.url"))
+                .addConverterFactory(GsonConverterFactory.create())
+
+                .build();
+        GetAppService service = retrofit.create(GetAppService.class);
+        Call<List<AppDto>> apps = service.getPopular();
+
+        apps.enqueue(new Callback<List<AppDto>>() {
+            @Override
+            public void onResponse(Call<List<AppDto>> call, Response<List<AppDto>> response) {
+                List<AppDto> appDtos = response.body();
+                LinearLayout l = container.findViewById(R.id.popular);
+                appDtos.forEach(c -> {
+                    System.out.println(c.getPackageName());
+
+                    LayoutInflater inf = LayoutInflater.from(container.getContext());
+                    View v = inf.inflate(R.layout.popular_card, l, false);
+
+                    ImageView iw = v.findViewById(R.id.popImg);
+                    iw.setClipToOutline(true);
+                    Picasso.get()
+
+                            .load(Uri.parse(Env.get(getContext(), "app.url") + "image/appIcon/" + c.getPackageName() + "/" + c.getAppIcon()))
+
+                            .into(iw);
+
+                    l.addView(v);
+
+                    v.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AppDto app = c;
+
+                            Bundle b = new Bundle();
+                            b.putString("packageName", app.getPackageName());
+                            b.putString("MaxColor", app.getMaxColor());
+                            b.putString("MinColor", app.getMinColor());
+                            b.putStringArrayList("categoryies", (ArrayList<String>) app.getCategoryies());
+                            b.putStringArrayList("screenshots", (ArrayList<String>) app.getScreenShots());
+                            b.putString("appBanner", app.getAppBanner());
+                            b.putString("apk", app.getApk());
+                            b.putString("appIcon", app.getAppIcon());
+                            b.putString("appTitle", app.getAppTitle());
+                            b.putString("appDescription", app.getDescription());
+                            b.putString("version", app.getVersion());
+                            b.putString("versionCode", app.getVersionCode());
+                            b.putInt("width", app.getWidth());
+                            b.putInt("height", app.getHeight());
+                            b.putString("mainActivity", app.getMainActivity());
+
+
+                            fm.beginTransaction()
+                                    .setReorderingAllowed(true).addToBackStack("SingleAppView")
+                                    .replace(R.id.fragmentContainer, SingleViewFragment.class, b)
+                                    .commit();
+                        }
+                    });
+
+
+                });
+            }
+
+
+            @Override
+            public void onFailure(Call<List<AppDto>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
     }
 
     private void loadMyApps(View container) {
-        LoadingFragment loader=LoadingFragment.getLoader();
+        LoadingFragment loader = LoadingFragment.getLoader();
         if (!loader.isLoading) {
             loader.show(fm, "Loader");
         }
@@ -178,7 +247,7 @@ public class HomeFragment extends Fragment {
                 if (response.isSuccessful()) {
                     System.out.println("sucess................");
                     apps = response.body();
-                    RecyclerView rec =container.findViewById(R.id.new_items);
+                    RecyclerView rec = container.findViewById(R.id.new_items);
                     StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
                     rec.setLayoutManager(staggeredGridLayoutManager);
                     rec.setAdapter(new HomeFragment.Adapter());
@@ -263,41 +332,35 @@ public class HomeFragment extends Fragment {
                             .into(appi);
 
 
-
-
-
-
-
-
                 }
 
             });
             holder.v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AppDto app=apps.get(pos);
+                    AppDto app = apps.get(pos);
 
                     Bundle b = new Bundle();
-                    b.putString("packageName",app.getPackageName());
+                    b.putString("packageName", app.getPackageName());
                     b.putString("MaxColor", app.getMaxColor());
                     b.putString("MinColor", app.getMinColor());
-                    b.putStringArrayList("categoryies",(ArrayList<String>) app.getCategoryies());
-                    b.putStringArrayList("screenshots",(ArrayList<String>)app.getScreenShots());
-                    b.putString("appBanner",app.getAppBanner());
-                    b.putString("apk",app.getApk());
-                    b.putString("appIcon",app.getAppIcon());
-                    b.putString("appTitle",app.getAppTitle());
-                    b.putString("appDescription",app.getDescription());
-                    b.putString("version",app.getVersion());
-                    b.putString("versionCode",app.getVersionCode());
-                    b.putInt("width",app.getWidth());
-                    b.putInt("height",app.getHeight());
-                    b.putString("mainActivity",app.getMainActivity());
+                    b.putStringArrayList("categoryies", (ArrayList<String>) app.getCategoryies());
+                    b.putStringArrayList("screenshots", (ArrayList<String>) app.getScreenShots());
+                    b.putString("appBanner", app.getAppBanner());
+                    b.putString("apk", app.getApk());
+                    b.putString("appIcon", app.getAppIcon());
+                    b.putString("appTitle", app.getAppTitle());
+                    b.putString("appDescription", app.getDescription());
+                    b.putString("version", app.getVersion());
+                    b.putString("versionCode", app.getVersionCode());
+                    b.putInt("width", app.getWidth());
+                    b.putInt("height", app.getHeight());
+                    b.putString("mainActivity", app.getMainActivity());
 
 
                     fm.beginTransaction()
                             .setReorderingAllowed(true).addToBackStack("SingleAppView")
-                            .replace(R.id.fragmentContainer, SingleViewFragment.class,b)
+                            .replace(R.id.fragmentContainer, SingleViewFragment.class, b)
                             .commit();
 
 

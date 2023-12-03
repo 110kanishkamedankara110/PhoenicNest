@@ -82,7 +82,7 @@ public class SingleViewFragment extends Fragment {
     }
 
     public void getPermissions() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
 
@@ -176,15 +176,10 @@ public class SingleViewFragment extends Fragment {
                         Uri uri = Uri.parse(url);
 
 
-                        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        dwb.setText("Downloading...");
+                        dwb.setEnabled(false);
+                        downloadId = download(uri, appTitle, apk, version, versionCode);
 
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-
-                        } else {
-                            dwb.setText("Downloading...");
-                            dwb.setEnabled(false);
-                            downloadId = download(uri, appTitle, apk, version, versionCode);
-                        }
                     }
                 });
 
@@ -230,7 +225,7 @@ public class SingleViewFragment extends Fragment {
         BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                getPermissions();
+
 
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 System.out.println(id + " " + downloadId);
@@ -363,8 +358,10 @@ public class SingleViewFragment extends Fragment {
 
 
     private long download(Uri uri, String appTitle, String apk, String version, String versionCode) {
-
-        getPermissions();
+        File f = new File(Environment.DIRECTORY_DOWNLOADS, "phoenixNest");
+        if (!f.exists()) {
+            f.mkdir();
+        }
 
         DownloadManager.Request request = new DownloadManager.Request(uri)
                 .setTitle(appTitle)

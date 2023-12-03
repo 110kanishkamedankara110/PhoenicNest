@@ -122,7 +122,7 @@
                         tools:ignore="TextContrastCheck" />
 
                     <TextView
-                        android:id="@+id/textView21"
+                        android:id="@+id/downloades"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -133,7 +133,7 @@
                         tools:ignore="TextContrastCheck" />
 
                     <TextView
-                        android:id="@+id/textView22"
+                        android:id="@+id/notifications"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"

@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setReorderingAllowed(true).addToBackStack("AppDetails")
                         .replace(R.id.fragmentContainer, AppDetailsFragment.class, ex)
                         .commit();
-            }else if(ex.getString("fragment").equals("AppRelease")){
+            } else if (ex.getString("fragment").equals("AppRelease")) {
                 getSupportFragmentManager().beginTransaction()
                         .setReorderingAllowed(true).addToBackStack("Release")
                         .replace(R.id.fragmentContainer, AppRelseaseFragment.class, ex)
@@ -91,22 +91,70 @@ public class HomeActivity extends AppCompatActivity {
 
                         }
                     });
-
+            Snackbar sb=null;
             System.out.println(user.isEmailVerified());
             if (!user.isEmailVerified()) {
-                Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Verify-", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(Intent.ACTION_MAIN);
-                                intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragmentDrawer)).commit();
+                sb = Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE);
+                sb.setAction("Open Emails", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_APP_EMAIL);
 
-                                startActivity(intent);
-                            }
-                        }).show();
+                            startActivity(intent);
+                        }catch (Exception e){
+
+                        }
+                    }
+                }).show();
+            } else {
+                if(sb!=null){
+                    sb.dismiss();
+                }
+
             }
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        System.out.println("resumed...............");
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        user = mAuth.getCurrentUser();
+        if (user != null) {
+            user.reload();
+            user = mAuth.getCurrentUser();
+        }
+        Snackbar sb=null;
+        if (!user.isEmailVerified()) {
+
+            sb = Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE);
+            sb.setAction("Open Emails", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+
+                        startActivity(intent);
+                    }catch (Exception e){
+
+                    }
+                }
+            }).show();
+        } else {
+            if(sb!=null){
+                sb.dismiss();
+            }
+
+        }
     }
 
 }

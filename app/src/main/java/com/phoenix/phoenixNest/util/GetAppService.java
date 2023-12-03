@@ -3,6 +3,8 @@ package com.phoenix.phoenixNest.util;
 
 import com.phoenix.phoenixNest.dto.AppDto;
 
+import org.checkerframework.checker.units.qual.C;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -19,4 +21,7 @@ public interface GetAppService {
 
     @GET("app/getAllApps/{key}")
     Call<List<AppDto>> getAllApps(@Path("key") String key);
+
+    @GET("app/getPopular")
+    Call<List<AppDto>> getPopular();
 }
