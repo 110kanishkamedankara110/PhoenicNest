@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         }
                     });
-            Snackbar sb=null;
+            Snackbar sb = null;
             System.out.println(user.isEmailVerified());
             if (!user.isEmailVerified()) {
                 getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragmentDrawer)).commit();
@@ -104,13 +104,13 @@ public class HomeActivity extends AppCompatActivity {
                             intent.addCategory(Intent.CATEGORY_APP_EMAIL);
 
                             startActivity(intent);
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                     }
                 }).show();
             } else {
-                if(sb!=null){
+                if (sb != null) {
                     sb.dismiss();
                 }
 
@@ -131,30 +131,32 @@ public class HomeActivity extends AppCompatActivity {
         if (user != null) {
             user.reload();
             user = mAuth.getCurrentUser();
-        }
-        Snackbar sb=null;
-        if (!user.isEmailVerified()) {
 
-            sb = Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE);
-            sb.setAction("Open Emails", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+            Snackbar sb = null;
+            if (!user.isEmailVerified()) {
 
-                        startActivity(intent);
-                    }catch (Exception e){
+                sb = Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE);
+                sb.setAction("Open Emails", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_APP_EMAIL);
 
+                            startActivity(intent);
+                        } catch (Exception e) {
+
+                        }
                     }
+                }).show();
+            } else {
+                if (sb != null) {
+                    sb.dismiss();
                 }
-            }).show();
-        } else {
-            if(sb!=null){
-                sb.dismiss();
-            }
 
+            }
         }
+
     }
 
 }

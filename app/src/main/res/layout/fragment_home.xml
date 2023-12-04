@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:background="@color/main"
     tools:context="com.phoenix.phoenixNest.HomeActivity">
 
 
@@ -19,9 +20,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ScrollView
-            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/main"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,16 +38,17 @@
                     android:paddingStart="10dp"
                     android:paddingTop="20dp"
                     android:text="@string/category"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     tools:ignore="RtlSymmetry" />
 
                 <HorizontalScrollView
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:scrollbarAlwaysDrawHorizontalTrack="true"
                     android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:scrollbars="none"
                     tools:ignore="SpeakableTextPresentCheck">
 
                     <LinearLayout
@@ -63,14 +66,15 @@
                     android:paddingStart="10dp"
                     android:paddingTop="20dp"
                     android:text="@string/popular"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     tools:ignore="RtlSymmetry" />
 
                 <HorizontalScrollView
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:scrollbars="none"
                     tools:ignore="SpeakableTextPresentCheck">
 
                     <LinearLayout
@@ -88,6 +92,7 @@
                     android:paddingStart="10dp"
                     android:paddingTop="20dp"
                     android:text="@string/new_it"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     tools:ignore="RtlSymmetry"
                     tools:text="@string/new_it" />

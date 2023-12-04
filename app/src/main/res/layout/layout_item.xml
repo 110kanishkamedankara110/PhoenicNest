@@ -8,21 +8,20 @@
     android:layout_margin="5dp">
 
     <FrameLayout
+        android:id="@+id/fra"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
 
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/blue_squire"
 
-            android:backgroundTint="@color/design_default_color_secondary"
             tools:visibility="visible">
 
             <ImageView
@@ -31,7 +30,6 @@
                 android:layout_height="match_parent"
 
                 android:background="@drawable/blue_squire"
-                android:backgroundTint="@color/lightG"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"

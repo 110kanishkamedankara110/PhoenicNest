@@ -132,16 +132,6 @@
                         android:textColorHint="#FFFFFF"
                         tools:ignore="TextContrastCheck" />
 
-                    <TextView
-                        android:id="@+id/notifications"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/notifications"
-                        android:textAlignment="center"
-                        android:textColor="#322E2E"
-                        android:textColorHint="#FFFFFF"
-                        tools:ignore="TextContrastCheck" />
                 </LinearLayout>
 
                 <Button

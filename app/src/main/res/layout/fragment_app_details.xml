@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main"
     tools:context="com.phoenix.phoenixNest.AppDetailsFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,7 +34,7 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/blue_squire"
-                android:backgroundTint="@color/lightG"
+                android:backgroundTint="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/addButton"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/catView"
@@ -59,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="App Details"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.047"
@@ -73,6 +75,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/border"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="Description"
@@ -88,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Category"
+                android:textColor="#FFFFFF"
                 app:layout_constraintStart_toStartOf="@+id/appDetails"
                 app:layout_constraintTop_toBottomOf="@+id/appDetails" />
 
@@ -98,6 +102,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/border"
+                android:backgroundTint="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/addButton"
                 app:layout_constraintHorizontal_bias="0.0"

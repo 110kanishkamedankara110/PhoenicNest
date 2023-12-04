@@ -171,58 +171,59 @@ public class HomeFragment extends Fragment {
         apps.enqueue(new Callback<List<AppDto>>() {
             @Override
             public void onResponse(Call<List<AppDto>> call, Response<List<AppDto>> response) {
-                List<AppDto> appDtos = response.body();
-                LinearLayout l = container.findViewById(R.id.popular);
-                appDtos.forEach(c -> {
-                    System.out.println(c.getPackageName());
+                if (response.isSuccessful()) {
+                    List<AppDto> appDtos = response.body();
+                    LinearLayout l = container.findViewById(R.id.popular);
+                    appDtos.forEach(c -> {
+                        System.out.println(c.getPackageName());
 
-                    LayoutInflater inf = LayoutInflater.from(container.getContext());
-                    View v = inf.inflate(R.layout.popular_card, l, false);
+                        LayoutInflater inf = LayoutInflater.from(container.getContext());
+                        View v = inf.inflate(R.layout.popular_card, l, false);
 
-                    ImageView iw = v.findViewById(R.id.popImg);
-                    iw.setClipToOutline(true);
-                    Picasso.get()
+                        ImageView iw = v.findViewById(R.id.popImg);
+                        iw.setClipToOutline(true);
+                        Picasso.get()
 
-                            .load(Uri.parse(Env.get(getContext(), "app.url") + "image/appIcon/" + c.getPackageName() + "/" + c.getAppIcon()))
+                                .load(Uri.parse(Env.get(getContext(), "app.url") + "image/appIcon/" + c.getPackageName() + "/" + c.getAppIcon()))
 
-                            .into(iw);
+                                .into(iw);
 
-                    l.addView(v);
+                        l.addView(v);
 
-                    v.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            AppDto app = c;
+                        v.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                AppDto app = c;
 
-                            Bundle b = new Bundle();
-                            b.putString("packageName", app.getPackageName());
-                            b.putString("MaxColor", app.getMaxColor());
-                            b.putString("MinColor", app.getMinColor());
-                            b.putStringArrayList("categoryies", (ArrayList<String>) app.getCategoryies());
-                            b.putStringArrayList("screenshots", (ArrayList<String>) app.getScreenShots());
-                            b.putString("appBanner", app.getAppBanner());
-                            b.putString("apk", app.getApk());
-                            b.putString("appIcon", app.getAppIcon());
-                            b.putString("appTitle", app.getAppTitle());
-                            b.putString("appDescription", app.getDescription());
-                            b.putString("version", app.getVersion());
-                            b.putString("versionCode", app.getVersionCode());
-                            b.putInt("width", app.getWidth());
-                            b.putInt("height", app.getHeight());
-                            b.putString("mainActivity", app.getMainActivity());
+                                Bundle b = new Bundle();
+                                b.putString("packageName", app.getPackageName());
+                                b.putString("MaxColor", app.getMaxColor());
+                                b.putString("MinColor", app.getMinColor());
+                                b.putStringArrayList("categoryies", (ArrayList<String>) app.getCategoryies());
+                                b.putStringArrayList("screenshots", (ArrayList<String>) app.getScreenShots());
+                                b.putString("appBanner", app.getAppBanner());
+                                b.putString("apk", app.getApk());
+                                b.putString("appIcon", app.getAppIcon());
+                                b.putString("appTitle", app.getAppTitle());
+                                b.putString("appDescription", app.getDescription());
+                                b.putString("version", app.getVersion());
+                                b.putString("versionCode", app.getVersionCode());
+                                b.putInt("width", app.getWidth());
+                                b.putInt("height", app.getHeight());
+                                b.putString("mainActivity", app.getMainActivity());
 
 
-                            fm.beginTransaction()
-                                    .setReorderingAllowed(true).addToBackStack("SingleAppView")
-                                    .replace(R.id.fragmentContainer, SingleViewFragment.class, b)
-                                    .commit();
-                        }
+                                fm.beginTransaction()
+                                        .setReorderingAllowed(true).addToBackStack("SingleAppView")
+                                        .replace(R.id.fragmentContainer, SingleViewFragment.class, b)
+                                        .commit();
+                            }
+                        });
+
+
                     });
-
-
-                });
+                }
             }
-
 
             @Override
             public void onFailure(Call<List<AppDto>> call, Throwable t) {

@@ -74,40 +74,40 @@ public class DrawerFragmernt extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        if (user != null) {
 
-        db.collection("user").document(user.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                @Nullable FirebaseFirestoreException e) {
+            db.collection("user").document(user.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                    @Nullable FirebaseFirestoreException e) {
 
-                ds = snapshot;
-                if (snapshot != null && snapshot.exists()) {
+                    ds = snapshot;
+                    if (snapshot != null && snapshot.exists()) {
 
 
-                } else {
+                    } else {
 
-                    TextView myapps = view.findViewById(R.id.myapps);
-                    TextView downloades = view.findViewById(R.id.downloades);
-                    TextView notifications = view.findViewById(R.id.notifications);
+                        TextView myapps = view.findViewById(R.id.myapps);
+                        TextView downloades = view.findViewById(R.id.downloades);
 
-                    int col = R.color.textHint;
-                    if (myapps != null) {
-                        myapps.setClickable(false);
-                        myapps.setTextColor(ContextCompat.getColor(getContext(),col));
+
+                        int col = R.color.textHint;
+                        if (myapps != null) {
+                            myapps.setClickable(false);
+                            myapps.setTextColor(ContextCompat.getColor(getContext(), col));
+                        }
+                        if (downloades != null) {
+                            downloades.setClickable(false);
+                            downloades.setTextColor(ContextCompat.getColor(getContext(), col));
+                        }
+
+
                     }
-                    if (downloades != null) {
-                        downloades.setClickable(false);
-                        downloades.setTextColor(ContextCompat.getColor(getContext(),col));
-                    }
-                    if (notifications != null) {
-                        notifications.setClickable(false);
-                        notifications.setTextColor(ContextCompat.getColor(getContext(),col));
-                    }
-
-
                 }
-            }
-        });
+
+            });
+
+        }
 
 
         if (user == null) {

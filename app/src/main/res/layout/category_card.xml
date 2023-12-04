@@ -15,7 +15,7 @@
         android:layout_width="198dp"
         android:layout_height="80dp"
         android:background="@drawable/blue_squire"
-        android:backgroundTint="@color/buttonCol">
+        android:backgroundTint="@color/white">
 
         <ImageView
             android:id="@+id/categoryImage"
@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/white"
             android:text="Games"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -48,7 +48,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="1280"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

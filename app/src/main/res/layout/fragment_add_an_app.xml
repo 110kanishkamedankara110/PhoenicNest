@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/lightG"
+    android:background="@color/main"
     tools:context="com.phoenix.phoenixNest.AddAnAppFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,6 +23,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/border"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:hint="@string/app_title"
                 android:inputType="text"
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/border"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:hint="@string/pakage_structure"
                 android:inputType="text"
@@ -53,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/border"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:hint="Main Activity name"
                 android:inputType="text"
@@ -68,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/create_a_app"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.069"
@@ -112,7 +116,7 @@
                 android:id="@+id/appicon"
                 android:layout_width="79dp"
                 android:layout_height="76dp"
-                android:background="@drawable/button"
+                android:background="@drawable/light_button"
                 android:scaleType="centerCrop"
                 app:backgroundTint="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/appbanner"
@@ -126,7 +130,7 @@
                 android:layout_width="210dp"
                 android:layout_height="169dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/button_blue_default"
+                android:background="@drawable/light_button"
                 app:backgroundTint="@null"
                 app:layout_constraintEnd_toEndOf="@+id/mainAct"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -139,6 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_icon"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="@+id/appicon"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="@+id/appicon"
@@ -150,6 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/app_banner"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="@+id/appbanner"
                 app:layout_constraintHorizontal_bias="0.524"
                 app:layout_constraintStart_toStartOf="@+id/appbanner"

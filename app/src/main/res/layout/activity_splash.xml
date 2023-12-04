@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main"
+    android:backgroundTint="@color/main"
     tools:context="com.phoenix.phoenixNest.SplashActivity">
 
     <ImageView
@@ -23,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phoenix Nest"
-        android:textColor="@color/main"
+        android:textColor="@color/lightG"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -36,8 +38,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:progressBackgroundTint="@color/white"
-        android:progressTint="@color/buttonCol"
+        android:progressBackgroundTint="@color/main"
+        android:progressTint="@color/lightG"
         app:layout_constraintEnd_toEndOf="@+id/textView20"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView20"

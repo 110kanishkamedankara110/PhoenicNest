@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:background="@color/main"
     tools:context="com.phoenix.phoenixNest.SigninActivity">
 
 
@@ -105,7 +106,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -120,6 +121,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/signin"
+                    android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -140,7 +142,7 @@
                     android:inputType="textEmailAddress"
                     android:textSize="14sp"
 
-                    app:backgroundTint="@null"
+                    app:backgroundTint="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +163,7 @@
 
                     android:inputType="textPassword"
                     android:textSize="14sp"
-                    app:backgroundTint="@null"
+                    app:backgroundTint="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/email"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/email"
@@ -181,7 +183,7 @@
                     android:importantForAutofill="no"
                     android:inputType="textPassword"
                     android:textSize="14sp"
-                    app:backgroundTint="@null"
+                    app:backgroundTint="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/password"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/password"
@@ -198,22 +200,21 @@
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/button"
                     android:text="@string/signin"
-                    android:textColor="@color/white"
+                    android:textColor="@drawable/button_text_color"
                     app:backgroundTint="@null"
                     app:layout_constraintEnd_toEndOf="@+id/password2"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/password2"
-                    app:layout_constraintTop_toBottomOf="@+id/password2"
 
+                    app:layout_constraintTop_toBottomOf="@+id/password2"
                     tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintButtonSize" />
 
                 <Button
                     android:id="@+id/login_button"
-                    android:layout_width="117dp"
+                    android:layout_width="0dp"
                     android:layout_height="48dp"
-                    android:layout_marginEnd="32dp"
                     android:text="@string/login"
-                    android:textColor="@color/buttonCol"
+                    android:textColor="@color/buttonBlueCOl"
                     app:backgroundTint="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
 
@@ -244,13 +245,14 @@
                     android:id="@+id/imageView5"
                     android:layout_width="354dp"
                     android:layout_height="170dp"
+                    android:scaleType="center"
                     app:layout_constraintBottom_toBottomOf="@+id/textView10"
                     app:layout_constraintEnd_toEndOf="@+id/textView10"
                     app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
                     app:layout_constraintTop_toTopOf="@+id/textView10"
                     app:layout_constraintVertical_bias="0.489"
-                    app:srcCompat="@drawable/logo" />
+                    app:srcCompat="@drawable/logo2" />
 
                 <TextView
                     android:id="@+id/errorText"
