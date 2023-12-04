@@ -54,7 +54,7 @@
             <EditText
                 android:id="@+id/versionText"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/border"
@@ -63,6 +63,7 @@
                 android:ems="10"
                 android:enabled="false"
                 android:inputType="text"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView44"
@@ -95,7 +96,7 @@
             <EditText
                 android:id="@+id/vetsionCodeText"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/border"
                 android:backgroundTint="@color/white"
@@ -103,6 +104,7 @@
                 android:ems="10"
                 android:enabled="false"
                 android:inputType="text"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/versionText"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView45"

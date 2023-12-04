@@ -176,7 +176,7 @@
                     android:id="@+id/imageView6"
                     android:layout_width="344dp"
                     android:layout_height="198dp"
-                    android:scaleType="center"
+                    android:scaleType="fitCenter"
                     app:layout_constraintBottom_toBottomOf="@+id/textView5"
                     app:layout_constraintEnd_toEndOf="@+id/textView5"
                     app:layout_constraintHorizontal_bias="0.497"

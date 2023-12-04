@@ -34,7 +34,8 @@
             android:background="@drawable/border"
             android:ems="10"
             android:hint="@string/new_email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -49,7 +50,8 @@
             android:background="@drawable/border"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
