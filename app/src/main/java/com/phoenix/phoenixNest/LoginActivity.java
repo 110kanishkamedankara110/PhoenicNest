@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.phoenix.phoenixNest.util.Error;
 import com.phoenix.phoenixNest.util.StatusBar;
 import com.phoenix.phoenicnest.R;
 
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
 
-        if(mAuth.getCurrentUser()!=null){
+        if (mAuth.getCurrentUser() != null) {
             Intent i = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(i);
         }
@@ -64,16 +65,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseUser currentUser = mAuth.getCurrentUser();
 
-                    String email = ((EditText) findViewById(R.id.email)).getText().toString();
-                    String password = ((EditText) findViewById(R.id.password)).getText().toString();
+                String email = ((EditText) findViewById(R.id.email)).getText().toString();
+                String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
-                    if(!email.isEmpty() && !password.isEmpty()){
-                        firebaseAuth(email.trim(), password);
-                    }
-
-
-
-
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    firebaseAuth(email.trim(), password);
+                }
 
 
             }
@@ -81,12 +78,16 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.fogetpw).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = ((EditText) findViewById(R.id.email)).getText().toString();
-                if(email.isEmpty()){
-                    new AlertDialog.Builder(LoginActivity.this).setTitle("Empty Email").setMessage("Please Enter Email").show();
-                }else{
-                    LoadingFragment loader=LoadingFragment.getLoader();
-                    loader.show(getSupportFragmentManager(),"Loader");
+                EditText d = findViewById(R.id.email);
+                String email = d.getText().toString();
+                if (email.isEmpty()) {
+
+                    Error.setErrorFiled(d, LoginActivity.this,findViewById(R.id.errorText3), "Enter Your Email");
+                } else {
+                    Error.removeErrorFiled(d,LoginActivity.this);
+                    Error.removeErrorText(findViewById(R.id.errorText3),LoginActivity.this);
+                    LoadingFragment loader = LoadingFragment.getLoader();
+                    loader.show(getSupportFragmentManager(), "Loader");
                     mAuth.sendPasswordResetEmail(email.trim())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -94,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         loader.dismiss();
                                         Toast.makeText(getApplicationContext(), "Password Reset Email Sent", Toast.LENGTH_SHORT).show();
-                                    }else{
+                                    } else {
                                         loader.dismiss();
                                         Toast.makeText(getApplicationContext(), "Email not found", Toast.LENGTH_SHORT).show();
                                     }
@@ -109,8 +110,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void firebaseAuth(String email, String password) {
-        LoadingFragment loader=LoadingFragment.getLoader();
-        loader.show(getSupportFragmentManager(),"Loader");
+        LoadingFragment loader = LoadingFragment.getLoader();
+        loader.show(getSupportFragmentManager(), "Loader");
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
