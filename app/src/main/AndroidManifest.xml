@@ -32,7 +32,9 @@
         </provider>
         <activity
             android:name="com.phoenix.phoenixNest.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,13 +43,17 @@
         </activity>
         <activity
             android:name="com.phoenix.phoenixNest.HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity
             android:name="com.phoenix.phoenixNest.SigninActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name="com.phoenix.phoenixNest.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
 
         <service
             android:name="com.google.android.gms.metadata.ModuleDependencies"

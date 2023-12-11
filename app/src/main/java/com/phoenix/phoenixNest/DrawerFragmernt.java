@@ -73,7 +73,8 @@ public class DrawerFragmernt extends Fragment {
         user = mAuth.getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
+        TextView myapps = view.findViewById(R.id.myapps);
+        TextView downloades = view.findViewById(R.id.downloades);
         if (user != null) {
 
             db.collection("user").document(user.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -87,19 +88,17 @@ public class DrawerFragmernt extends Fragment {
 
                     } else {
 
-                        TextView myapps = view.findViewById(R.id.myapps);
-                        TextView downloades = view.findViewById(R.id.downloades);
+
 
 
                         int col = R.color.textHint;
                         if (myapps != null) {
                             myapps.setClickable(false);
-                            myapps.setTextColor(ContextCompat.getColor(getContext(), col));
+                            myapps.setText("");
                         }
                         if (downloades != null) {
                             downloades.setClickable(false);
-                            downloades.setTextColor(ContextCompat.getColor(getContext(), col));
-                        }
+                            downloades.setText("");                        }
 
 
                     }
@@ -276,12 +275,12 @@ public class DrawerFragmernt extends Fragment {
             public void onClick(View v) {
                 Fragment fragment =
                         fm.findFragmentById(R.id.fragmentContainer);
-                if (!(fragment instanceof HomeFragment)) {
+
                     fm.beginTransaction()
                             .setReorderingAllowed(true).addToBackStack("Home")
                             .replace(R.id.fragmentContainer, HomeFragment.class, null)
                             .commit();
-                }
+
             }
         });
 

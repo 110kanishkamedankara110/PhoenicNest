@@ -67,54 +67,59 @@ public class HomeActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         user = mAuth.getCurrentUser();
         if (user != null) {
-            user.reload();
-            user = mAuth.getCurrentUser();
-            loader.show(getSupportFragmentManager(), "Loader");
-            db.collection("user").document(user.getUid())
-                    .get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+            user.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    loader.show(getSupportFragmentManager(), "Loader");
+                    db.collection("user").document(user.getUid())
+                            .get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                            if (documentSnapshot.exists()) {
-                                User user = documentSnapshot.toObject(User.class);
-                                System.out.println(user.getName());
+                                    if (documentSnapshot.exists()) {
+                                        User user = documentSnapshot.toObject(User.class);
+                                        System.out.println(user.getName());
 
+                                    }
+                                    loader.dismiss();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    loader.dismiss();
+
+
+                                }
+                            });
+                    Snackbar sb = null;
+                    user = mAuth.getCurrentUser();
+                    System.out.println("........" + user.isEmailVerified());
+                    if (!user.isEmailVerified()) {
+                        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragmentDrawer)).commit();
+                        sb = Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE);
+                        sb.setAction("Open Emails", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                                    intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+
+                                    startActivity(intent);
+                                } catch (Exception e) {
+
+                                }
                             }
-                            loader.dismiss();
+                        }).show();
+                    } else {
+                        if (sb != null) {
+                            sb.dismiss();
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            loader.dismiss();
 
-
-                        }
-                    });
-            Snackbar sb = null;
-            System.out.println(user.isEmailVerified());
-            if (!user.isEmailVerified()) {
-                getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.fragmentDrawer)).commit();
-                sb = Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE);
-                sb.setAction("Open Emails", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        try {
-                            Intent intent = new Intent(Intent.ACTION_MAIN);
-                            intent.addCategory(Intent.CATEGORY_APP_EMAIL);
-
-                            startActivity(intent);
-                        } catch (Exception e) {
-
-                        }
                     }
-                }).show();
-            } else {
-                if (sb != null) {
-                    sb.dismiss();
                 }
+            });
 
-            }
         }
 
     }
@@ -129,32 +134,42 @@ public class HomeActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         user = mAuth.getCurrentUser();
         if (user != null) {
-            user.reload();
-            user = mAuth.getCurrentUser();
+            user.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    user = mAuth.getCurrentUser();
+                    user.getIdToken(true);
 
-            Snackbar sb = null;
-            if (!user.isEmailVerified()) {
+                    Snackbar sb = null;
+                    if (!user.isEmailVerified()) {
 
-                sb = Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE);
-                sb.setAction("Open Emails", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        try {
-                            Intent intent = new Intent(Intent.ACTION_MAIN);
-                            intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                        sb = Snackbar.make(findViewById(R.id.cont), "Email Not Verified Please Verify Email", Snackbar.LENGTH_INDEFINITE);
+                        sb.setAction("Open Emails", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                                    intent.addCategory(Intent.CATEGORY_APP_EMAIL);
 
-                            startActivity(intent);
-                        } catch (Exception e) {
+                                    startActivity(intent);
+                                } catch (Exception e) {
+
+                                }
+                            }
+                        }).show();
+                    } else {
+                        if (sb != null) {
+                            sb.dismiss();
+                            getSupportFragmentManager().beginTransaction()
+                                    .add(R.id.fragmentDrawer, DrawerFragmernt.class, null)
+                                    .commit();
 
                         }
-                    }
-                }).show();
-            } else {
-                if (sb != null) {
-                    sb.dismiss();
-                }
 
-            }
+                    }
+                }
+            });
+
         }
 
     }

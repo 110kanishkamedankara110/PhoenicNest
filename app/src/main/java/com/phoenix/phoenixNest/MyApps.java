@@ -1,11 +1,12 @@
 package com.phoenix.phoenixNest;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.fragment.app.Fragment;
@@ -18,12 +19,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.common.io.Resources;
 import com.google.firebase.auth.FirebaseAuth;
 import com.phoenix.phoenicnest.R;
 import com.phoenix.phoenixNest.dto.AppDto;
@@ -49,6 +52,9 @@ public class MyApps extends Fragment {
     List<AppDto> apps;
     float loc_X = 0;
     float loc_y = 0;
+
+    float toc_X = 0;
+    float toc_Y = 0;
     View v;
     FragmentManager fm;
     LoadingFragment loader = LoadingFragment.getLoader();
@@ -62,6 +68,8 @@ public class MyApps extends Fragment {
 
     float v1_locX;
     float v1_locY;
+
+    private GestureDetectorCompat mDetector;
 
     MotionEvent e;
 
@@ -256,7 +264,6 @@ public class MyApps extends Fragment {
 //                            FrameLayout f = v1.findViewById(R.id.fral);
 //
 //
-//
 //                            SpringAnimation s = new SpringAnimation(vi1, DynamicAnimation.Y, 30);
 //                            SpringAnimation s1 = new SpringAnimation(vi1, DynamicAnimation.X, 30);
 //                            s.start();
@@ -267,15 +274,20 @@ public class MyApps extends Fragment {
 //
 //
 //                    });
+
+
                     holder.v.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View v, MotionEvent event) {
-
+                            holder.v.releasePointerCapture();
                             e = event;
-                            System.out.println("dddd................................");
                             FrameLayout fl = view.findViewById(R.id.fcccc);
                             loc_y = event.getY();
                             loc_X = event.getX();
+
+
+
+
                             switch (event.getAction()) {
                                 case MotionEvent.ACTION_UP:
                                     v1.setY(0);
@@ -287,7 +299,27 @@ public class MyApps extends Fragment {
                                     hm.remove(fl);
                                     fl.removeView(v1);
                                     break;
+                                case MotionEvent.ACTION_DOWN:
+                                    toc_X = event.getX();
+                                    toc_Y=event.getY();
 
+                                case (MotionEvent.ACTION_MOVE):
+                                    View v1 = vi1.findViewById(R.id.v1);
+                                    System.out.println(loc_X + "  " +  toc_X + v1.getX());
+
+                                    if (loc_X > toc_X + v1.getX()) {
+                                        SpringAnimation s2 = new SpringAnimation(v1, DynamicAnimation.SCALE_X, 2);
+                                        SpringAnimation s3 = new SpringAnimation(v1, DynamicAnimation.SCALE_Y, 2);
+                                        s2.start();
+                                        s3.start();
+                                    } else {
+                                        SpringAnimation s2 = new SpringAnimation(v1, DynamicAnimation.SCALE_X, 1);
+                                        SpringAnimation s3 = new SpringAnimation(v1, DynamicAnimation.SCALE_Y, 1);
+                                        s2.start();
+                                        s3.start();
+                                    }
+
+//
 
                             }
 

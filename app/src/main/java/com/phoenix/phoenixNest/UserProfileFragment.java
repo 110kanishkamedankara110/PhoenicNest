@@ -380,6 +380,10 @@ public class UserProfileFragment extends Fragment {
                                         fm.beginTransaction()
                                                 .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
                                                 .commit();
+
+                                        fm.beginTransaction()
+                                                .replace(R.id.fragmentDrawer,DrawerFragmernt.class,null)
+                                                .commit();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {

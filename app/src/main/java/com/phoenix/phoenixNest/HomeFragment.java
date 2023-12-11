@@ -76,8 +76,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
+        if (user != null) {
+            user.reload();
+            user = auth.getCurrentUser();
+        }
         Notifications.registerNotificationChannel(getActivity());
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
