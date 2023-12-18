@@ -3,15 +3,20 @@ package com.phoenix.phoenixNest;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,8 +33,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.phoenix.phoenicnest.R;
+import com.phoenix.phoenixNest.dto.AppDto;
 import com.phoenix.phoenixNest.dto.User;
+import com.phoenix.phoenixNest.util.Env;
+import com.phoenix.phoenixNest.util.GetAppService;
 import com.phoenix.phoenixNest.util.StatusBar;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -37,24 +54,90 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseUser user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent i = getIntent();
+        String action = i.getAction();
+        if (((Intent.ACTION_SEND.equals(action)&& i.getType() != null)|| (Intent.ACTION_VIEW.equals(action))) ) {
+            Uri link;
+
+
+            if (Intent.ACTION_SEND.equals(action)) {
+                link = Uri.parse(i.getStringExtra("android.intent.extra.TEXT"));
+            } else {
+                link = i.getData();
+            }
+            String id = link.getQueryParameter("id");
+
+            Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(Env.get(getApplicationContext(), "app.url")).build();
+            GetAppService getAppService = retrofit.create(GetAppService.class);
+            Call<List<AppDto>> call = getAppService.getAllApps(id);
+
+            call.enqueue(new Callback<List<AppDto>>() {
+                @Override
+                public void onResponse(Call<List<AppDto>> call, Response<List<AppDto>> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null && response.body().size() > 0) {
+                            AppDto app = response.body().get(0);
+                            Bundle b = new Bundle();
+                            b.putString("packageName", app.getPackageName());
+                            b.putString("MaxColor", app.getMaxColor());
+                            b.putString("MinColor", app.getMinColor());
+                            b.putStringArrayList("categoryies", (ArrayList<String>) app.getCategoryies());
+                            b.putStringArrayList("screenshots", (ArrayList<String>) app.getScreenShots());
+                            b.putString("appBanner", app.getAppBanner());
+                            b.putString("apk", app.getApk());
+                            b.putString("appIcon", app.getAppIcon());
+                            b.putString("appTitle", app.getAppTitle());
+                            b.putString("appDescription", app.getDescription());
+                            b.putString("version", app.getVersion());
+                            b.putString("versionCode", app.getVersionCode());
+                            b.putInt("width", app.getWidth());
+                            b.putInt("height", app.getHeight());
+                            b.putString("mainActivity", app.getMainActivity());
+
+
+                            getSupportFragmentManager().beginTransaction()
+                                    .setReorderingAllowed(true).addToBackStack("SingleAppView")
+                                    .replace(R.id.fragmentContainer, SingleViewFragment.class, b)
+                                    .commit();
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "App Cannot be found", Toast.LENGTH_SHORT);
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<AppDto>> call, Throwable t) {
+
+                }
+            });
+
+
+        }
+
+
         Bundle ex = i.getExtras();
         if (ex != null) {
-            if (ex.getString("fragment").equals("AddDetailsFragment")) {
+            if (ex.getString("fragment") != null) {
 
-                getSupportFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true).addToBackStack("AppDetails")
-                        .replace(R.id.fragmentContainer, AppDetailsFragment.class, ex)
-                        .commit();
-            } else if (ex.getString("fragment").equals("AppRelease")) {
-                getSupportFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true).addToBackStack("Release")
-                        .replace(R.id.fragmentContainer, AppRelseaseFragment.class, ex)
-                        .commit();
+                if (ex.getString("fragment").equals("AddDetailsFragment")) {
+
+                    getSupportFragmentManager().beginTransaction()
+                            .setReorderingAllowed(true).addToBackStack("AppDetails")
+                            .replace(R.id.fragmentContainer, AppDetailsFragment.class, ex)
+                            .commit();
+                } else if (ex.getString("fragment").equals("AppRelease")) {
+                    getSupportFragmentManager().beginTransaction()
+                            .setReorderingAllowed(true).addToBackStack("Release")
+                            .replace(R.id.fragmentContainer, AppRelseaseFragment.class, ex)
+                            .commit();
+                }
             }
         }
         setContentView(R.layout.activity_home);

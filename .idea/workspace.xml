@@ -10,21 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5166fc09-e548-4ab6-afaf-be4ea42224a1" name="Changes" comment="app banner color ,category app list">
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/app.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/DrawerFragmernt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/DrawerFragmernt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/MyApps.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/MyApps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/UserProfileFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/phoenix/phoenixNest/UserProfileFragment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\BLACKBOX\.android\avd\Pixel_2_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\BLACKBOX\.android\avd\Pixel_4_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -117,35 +113,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ApkExportedModule": "PhoenicNest.app",
-    "BundleExportedModule": "PhoenicNest.app",
-    "ResourceManagerPrefKey.ResourceType": "MIPMAP",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatImageView.java_SELECTED": "AppCompatImageView",
-    "android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout/2.1.4/27e12209e529970f69bc817f349c247ef238fae7/constraintlayout-2.1.4-sources.jar!/androidx/constraintlayout/widget/ConstraintLayout.java_SELECTED": "ConstraintLayout",
-    "android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED": "RecyclerView",
-    "android-custom-viewC:/Users/BLACKBOX/AndroidStudioProjects/PhoenicNest/app/src/main/java/com/phoenix/phoenixNest/util/RoundedImageView.java_SELECTED": "RoundedImageView",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "last_opened_file_path": "C:/Users/BLACKBOX/AndroidStudioProjects/Firebase",
-    "project.structure.last.edited": "Dependencies",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "show.do.not.copy.http.proxy.settings.to.gradle": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ApkExportedModule&quot;: &quot;PhoenicNest.app&quot;,
+    &quot;BundleExportedModule&quot;: &quot;PhoenicNest.app&quot;,
+    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;MIPMAP&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatImageView.java_SELECTED&quot;: &quot;AppCompatImageView&quot;,
+    &quot;android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout/2.1.4/27e12209e529970f69bc817f349c247ef238fae7/constraintlayout-2.1.4-sources.jar!/androidx/constraintlayout/widget/ConstraintLayout.java_SELECTED&quot;: &quot;ConstraintLayout&quot;,
+    &quot;android-custom-viewC:/Users/BLACKBOX/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED&quot;: &quot;RecyclerView&quot;,
+    &quot;android-custom-viewC:/Users/BLACKBOX/AndroidStudioProjects/PhoenicNest/app/src/main/java/com/phoenix/phoenixNest/util/RoundedImageView.java_SELECTED&quot;: &quot;RoundedImageView&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/BLACKBOX/AndroidStudioProjects/Firebase&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Dependencies&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;show.do.not.copy.http.proxy.settings.to.gradle&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "android-custom-viewC:/Users/BLACKBOX/AndroidStudioProjects/PhoenicNest/app/src/main/java/com/phoenix/phoenixNest/util/RoundedImageView.java_RoundedImageView_DIMENSIONS": [
-      "1080",
-      "1920"
+  &quot;keyToStringList&quot;: {
+    &quot;android-custom-viewC:/Users/BLACKBOX/AndroidStudioProjects/PhoenicNest/app/src/main/java/com/phoenix/phoenixNest/util/RoundedImageView.java_RoundedImageView_DIMENSIONS&quot;: [
+      &quot;1080&quot;,
+      &quot;1920&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Properties" />
     <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
@@ -398,7 +394,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701688311018</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="app banner color ,category app list">
+      <created>1702303954213</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1702303954213</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
