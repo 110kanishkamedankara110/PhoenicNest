@@ -377,9 +377,9 @@ public class UserProfileFragment extends Fragment {
                                         },10000);
 
 
-                                        fm.beginTransaction()
-                                                .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
-                                                .commit();
+//                                        fm.beginTransaction()
+//                                                .replace(R.id.fragmentContainer, UserProfileFragment.class, null)
+//                                                .commit();
 
                                         fm.beginTransaction()
                                                 .replace(R.id.fragmentDrawer,DrawerFragmernt.class,null)

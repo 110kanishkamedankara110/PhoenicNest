@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
 
         android:layout_height="match_parent"
+        android:background="@drawable/blue_squire"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,18 +29,21 @@
                 android:id="@+id/bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                tools:srcCompat="@drawable/blue_squire"
                 android:background="@drawable/blue_squire"
+                android:backgroundTint="@color/white"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
 
+                android:layout_height="match_parent"
                 android:background="@drawable/blue_squire"
                 android:padding="10dp"
                 tools:visibility="visible">
@@ -66,7 +70,7 @@
         <TextView
             android:id="@+id/textView18"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             tools:ignore="MissingConstraints" />
 
 
